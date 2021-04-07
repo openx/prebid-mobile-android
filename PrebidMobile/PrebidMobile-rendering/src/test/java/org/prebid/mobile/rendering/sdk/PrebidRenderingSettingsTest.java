@@ -82,4 +82,23 @@ public class PrebidRenderingSettingsTest {
 
         assertEquals(PrebidRenderingSettings.SCHEME_HTTP, PrebidRenderingSettings.getWebViewBaseUrlScheme());
     }
+
+    @Test
+    public void setBidServerHost_emptyValue_ReturnDefaultBidServerHost() {
+        String expected = PrebidRenderingSettings.getBidServerHost();
+
+        PrebidRenderingSettings.setBidServerHost("");
+        assertEquals(expected, PrebidRenderingSettings.getBidServerHost());
+
+        PrebidRenderingSettings.setBidServerHost(null);
+        assertEquals(expected, PrebidRenderingSettings.getBidServerHost());
+    }
+
+    @Test
+    public void setBidServerHost_validValue_ReturnModifiedHost() {
+        final String host = "http://customserver.com";
+        PrebidRenderingSettings.setBidServerHost(host);
+
+        assertEquals(host, PrebidRenderingSettings.getBidServerHost());
+    }
 }

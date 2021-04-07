@@ -1,6 +1,7 @@
 package org.prebid.mobile.rendering.sdk;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import org.prebid.mobile.rendering.BuildConfig;
@@ -55,9 +56,6 @@ public class PrebidRenderingSettings {
      */
     public static final int AUTO_REFRESH_DELAY_MIN = 15000;
 
-    // Avoid compiler inlining by making the value a result of a method call
-    private static final String BID_SERVER_HOST = String.valueOf("https://prebid.openx.net/openrtb2/auction");
-
     private static final AtomicInteger INIT_SDK_TASK_COUNT = new AtomicInteger();
     private static final int MANDATORY_TASK_COUNT = 3;
 
@@ -75,6 +73,7 @@ public class PrebidRenderingSettings {
 
     private static SdkInitListener sInitSdkListener;
 
+    private static String sBidServerHost = "https://prebid.openx.net/openrtb2/auction";
     private static String sAccountId;
 
     private static int sConnectionTimeout = BaseNetworkTask.TIMEOUT_DEFAULT;
@@ -91,7 +90,7 @@ public class PrebidRenderingSettings {
      */
 
     public static void initializeSDK(Context context, final SdkInitListener sdkInitListener)
-    throws AdException {
+            throws AdException {
         Log.d(TAG, "Initializing OpenX SDK");
         if (context == null) {
             throw new AdException(AdException.INIT_ERROR, "OpenXSDK initialization failed. Context is null");
@@ -140,8 +139,17 @@ public class PrebidRenderingSettings {
         sConnectionTimeout = millis;
     }
 
+    public static void setBidServerHost(String host) {
+        if (TextUtils.isEmpty(host)) {
+            OXLog.error(TAG, "setBidServerHost: Error. Can't assign a null or empty host.");
+            return;
+        }
+
+        sBidServerHost = host;
+    }
+
     public static String getBidServerHost() {
-        return BID_SERVER_HOST;
+        return sBidServerHost;
     }
 
     public static String getAccountId() {
