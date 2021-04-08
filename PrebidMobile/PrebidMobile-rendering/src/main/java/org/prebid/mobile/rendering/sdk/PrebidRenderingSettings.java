@@ -1,10 +1,10 @@
 package org.prebid.mobile.rendering.sdk;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.Log;
 
 import org.prebid.mobile.rendering.BuildConfig;
+import org.prebid.mobile.rendering.bidding.enums.Host;
 import org.prebid.mobile.rendering.errors.AdException;
 import org.prebid.mobile.rendering.mraid.MraidEnv;
 import org.prebid.mobile.rendering.networking.BaseNetworkTask;
@@ -73,7 +73,7 @@ public class PrebidRenderingSettings {
 
     private static SdkInitListener sInitSdkListener;
 
-    private static String sBidServerHost = "https://prebid.openx.net/openrtb2/auction";
+    private static Host sBidServerHost = Host.CUSTOM;
     private static String sAccountId;
 
     private static int sConnectionTimeout = BaseNetworkTask.TIMEOUT_DEFAULT;
@@ -139,16 +139,16 @@ public class PrebidRenderingSettings {
         sConnectionTimeout = millis;
     }
 
-    public static void setBidServerHost(String host) {
-        if (TextUtils.isEmpty(host)) {
-            OXLog.error(TAG, "setBidServerHost: Error. Can't assign a null or empty host.");
+    public static void setBidServerHost(Host host) {
+        if (host == null) {
+            OXLog.error(TAG, "setBidServerHost: Error. Can't assign a null host.");
             return;
         }
 
         sBidServerHost = host;
     }
 
-    public static String getBidServerHost() {
+    public static Host getBidServerHost() {
         return sBidServerHost;
     }
 

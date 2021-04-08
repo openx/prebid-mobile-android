@@ -1,5 +1,6 @@
 package org.prebid.mobile.renderingtestapp.utils
 
+import org.prebid.mobile.rendering.bidding.enums.Host
 import org.prebid.mobile.rendering.sdk.PrebidRenderingSettings
 
 object SourcePicker {
@@ -39,7 +40,9 @@ object SourcePicker {
         }
     }
 
-    private fun setBidServerHost(host: String) {
+    private fun setBidServerHost(hostUrl: String) {
+        val host = Host.CUSTOM
+        host.hostUrl = hostUrl
         PrebidRenderingSettings.setBidServerHost(host)
     }
 }
