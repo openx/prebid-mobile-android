@@ -34,7 +34,7 @@ import org.prebid.mobile.rendering.models.AdConfiguration;
 import org.prebid.mobile.rendering.models.HTMLCreative;
 import org.prebid.mobile.rendering.models.InterstitialDisplayPropertiesInternal;
 import org.prebid.mobile.rendering.mraid.methods.InterstitialManagerMraidDelegate;
-import org.prebid.mobile.rendering.utils.logger.OXLog;
+import org.prebid.mobile.rendering.utils.logger.PbLog;
 import org.prebid.mobile.rendering.views.AdViewManager;
 import org.prebid.mobile.rendering.views.webview.PrebidWebViewInterstitial;
 import org.prebid.mobile.rendering.views.webview.WebViewBanner;
@@ -101,7 +101,7 @@ public class InterstitialManager implements InterstitialManagerInterface {
     // Note: The context should be the Activity this view will display on top of
     public void displayAdViewInInterstitial(Context context, View view) {
         if (!(context instanceof Activity)) {
-            OXLog.error(TAG, "displayAdViewInInterstitial(): Can not display interstitial without activity context");
+            PbLog.error(TAG, "displayAdViewInInterstitial(): Can not display interstitial without activity context");
             return;
         }
 
@@ -115,7 +115,7 @@ public class InterstitialManager implements InterstitialManagerInterface {
 
     public void displayVideoAdViewInInterstitial(Context context, View adView) {
         if (!(context instanceof Activity && adView instanceof VideoView)) {
-            OXLog.error(TAG, "displayAdViewInInterstitial(): Can not display interstitial. "
+            PbLog.error(TAG, "displayAdViewInInterstitial(): Can not display interstitial. "
                              + "Context is not activity or adView is not an instance of VideoAdView");
             return;
         }
@@ -150,7 +150,7 @@ public class InterstitialManager implements InterstitialManagerInterface {
 
     @Override
     public void interstitialClosed(View viewToClose) {
-        OXLog.debug(TAG, "interstitialClosed");
+        PbLog.debug(TAG, "interstitialClosed");
 
         try {
             if (!mViewStack.isEmpty() && mMraidDelegate != null) {
@@ -180,14 +180,14 @@ public class InterstitialManager implements InterstitialManagerInterface {
             }
         }
         catch (Exception e) {
-            OXLog.error(TAG, "InterstitialClosed failed: " + Log.getStackTraceString(e));
+            PbLog.error(TAG, "InterstitialClosed failed: " + Log.getStackTraceString(e));
         }
     }
 
     @Override
     public void interstitialDialogShown(ViewGroup rootViewGroup) {
         if (mInterstitialDisplayDelegate == null) {
-            OXLog.debug(TAG, "interstitialDialogShown(): Failed. mInterstitialDelegate == null");
+            PbLog.debug(TAG, "interstitialDialogShown(): Failed. mInterstitialDelegate == null");
             return;
         }
         mInterstitialDisplayDelegate.interstitialDialogShown(rootViewGroup);

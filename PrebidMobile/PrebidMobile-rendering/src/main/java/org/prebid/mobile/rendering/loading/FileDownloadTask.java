@@ -20,7 +20,7 @@ import android.util.Log;
 
 import org.prebid.mobile.rendering.errors.ServerWrongStatusCode;
 import org.prebid.mobile.rendering.networking.BaseNetworkTask;
-import org.prebid.mobile.rendering.utils.logger.OXLog;
+import org.prebid.mobile.rendering.utils.logger.PbLog;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -90,7 +90,7 @@ public class FileDownloadTask extends BaseNetworkTask {
             processData(urlConnection, result);
         }
         catch (IOException e) {
-            OXLog.error(TAG, "download of media failed: " + Log.getStackTraceString(e));
+            PbLog.error(TAG, "download of media failed: " + Log.getStackTraceString(e));
             result.setException(new Exception("download of media failed " + e.getMessage()));
         }
         finally {
@@ -129,7 +129,7 @@ public class FileDownloadTask extends BaseNetworkTask {
     @Override
     protected void onPostExecute(GetUrlResult urlResult) {
         if (urlResult.getException() != null) {
-            OXLog.debug(TAG, "download of media failed" + urlResult.getException());
+            PbLog.debug(TAG, "download of media failed" + urlResult.getException());
             if (mListener != null) {
                 mListener.onFileDownloadError((urlResult.getException().getMessage()));
             }

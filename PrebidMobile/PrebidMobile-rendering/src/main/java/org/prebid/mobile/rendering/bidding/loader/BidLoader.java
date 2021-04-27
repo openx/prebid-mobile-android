@@ -28,7 +28,7 @@ import org.prebid.mobile.rendering.networking.modelcontrollers.BidRequester;
 import org.prebid.mobile.rendering.networking.parameters.AdRequestInput;
 import org.prebid.mobile.rendering.sdk.PrebidRenderingSettings;
 import org.prebid.mobile.rendering.utils.helpers.RefreshTimerTask;
-import org.prebid.mobile.rendering.utils.logger.OXLog;
+import org.prebid.mobile.rendering.utils.logger.PbLog;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -82,22 +82,22 @@ public class BidLoader {
 
     private final RefreshTimerTask mRefreshTimerTask = new RefreshTimerTask(() -> {
         if (mAdConfiguration == null) {
-            OXLog.error(TAG, "handleRefresh(): Failure. AdConfiguration is null");
+            PbLog.error(TAG, "handleRefresh(): Failure. AdConfiguration is null");
             return;
         }
 
         if (mBidRefreshListener == null) {
-            OXLog.error(TAG, "RefreshListener is null. No refresh or load will be performed.");
+            PbLog.error(TAG, "RefreshListener is null. No refresh or load will be performed.");
             return;
         }
 
         if (!mBidRefreshListener.canPerformRefresh()) {
-            OXLog.debug(TAG, "handleRefresh(): Loading skipped, rescheduling timer. View is not visible.");
+            PbLog.debug(TAG, "handleRefresh(): Loading skipped, rescheduling timer. View is not visible.");
             setupRefreshTimer();
             return;
         }
 
-        OXLog.debug(TAG, "refresh triggered: load() being called ");
+        PbLog.debug(TAG, "refresh triggered: load() being called ");
         load();
     });
 
@@ -114,22 +114,22 @@ public class BidLoader {
 
     public void load() {
         if (mRequestListener == null) {
-            OXLog.warn(TAG, "Listener is null");
+            PbLog.warn(TAG, "Listener is null");
             return;
         }
         if (mAdConfiguration == null) {
-            OXLog.warn(TAG, "No ad request configuration to load");
+            PbLog.warn(TAG, "No ad request configuration to load");
             return;
         }
         if (mContextReference.get() == null) {
-            OXLog.warn(TAG, "Context is null");
+            PbLog.warn(TAG, "Context is null");
             return;
         }
 
         // If mCurrentlyLoading == false, set it to true and return true; else return false
         // If compareAndSet returns false, it means mCurrentlyLoading was already true and therefore we should skip loading
         if (!mCurrentlyLoading.compareAndSet(false, true)) {
-            OXLog.warn(TAG, "Previous load is in progress. Load() ignored.");
+            PbLog.warn(TAG, "Previous load is in progress. Load() ignored.");
             return;
         }
 
@@ -137,12 +137,12 @@ public class BidLoader {
     }
 
     public void setupRefreshTimer() {
-        OXLog.debug(TAG, "Schedule refresh timer");
+        PbLog.debug(TAG, "Schedule refresh timer");
 
         boolean isRefreshAvailable = mAdConfiguration != null
                                      && mAdConfiguration.isAdType(AdConfiguration.AdUnitIdentifierType.BANNER);
         if (!isRefreshAvailable) {
-            OXLog.debug(TAG, "setupRefreshTimer: Failed. AdConfiguration is null or AdType is not Banner");
+            PbLog.debug(TAG, "setupRefreshTimer: Failed. AdConfiguration is null or AdType is not Banner");
             return;
         }
 
@@ -152,7 +152,7 @@ public class BidLoader {
         //So, check it against it to stop it from creating a refreshtask
 
         if (refreshTimeMillis == Integer.MAX_VALUE || refreshTimeMillis <= 0) {
-            OXLog.debug(TAG, "setupRefreshTimer(): refreshTimeMillis is: "
+            PbLog.debug(TAG, "setupRefreshTimer(): refreshTimeMillis is: "
                              + refreshTimeMillis + ". Skipping refresh timer initialization");
             return;
         }
@@ -163,7 +163,7 @@ public class BidLoader {
     }
 
     public void cancelRefresh() {
-        OXLog.debug(TAG, "Cancel refresh timer");
+        PbLog.debug(TAG, "Cancel refresh timer");
         mRefreshTimerTask.cancelRefreshTimer();
     }
 
@@ -187,11 +187,11 @@ public class BidLoader {
     }
 
     private void failedToLoadBid(String msg) {
-        OXLog.error(TAG, "Invalid bid response: " + msg);
+        PbLog.error(TAG, "Invalid bid response: " + msg);
         mCurrentlyLoading.set(false);
 
         if (mRequestListener == null) {
-            OXLog.warn(TAG, "onFailedToLoad: Listener is null.");
+            PbLog.warn(TAG, "onFailedToLoad: Listener is null.");
             cancelRefresh();
             return;
         }

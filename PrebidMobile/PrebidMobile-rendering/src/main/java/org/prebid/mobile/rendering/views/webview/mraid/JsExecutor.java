@@ -24,17 +24,17 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.WebView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
-
 import org.prebid.mobile.rendering.models.internal.MraidVariableContainer;
 import org.prebid.mobile.rendering.utils.exposure.ViewExposure;
 import org.prebid.mobile.rendering.utils.helpers.HandlerQueueManager;
-import org.prebid.mobile.rendering.utils.logger.OXLog;
+import org.prebid.mobile.rendering.utils.logger.PbLog;
 import org.prebid.mobile.rendering.views.webview.WebViewBase;
 
 import java.lang.ref.WeakReference;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 public class JsExecutor {
     private static final String TAG = JsExecutor.class.getSimpleName();
@@ -161,17 +161,17 @@ public class JsExecutor {
     @VisibleForTesting
     void evaluateJavaScript(final String script) {
         if (mWebView == null) {
-            OXLog.debug(TAG, "evaluateJavaScript failure. mWebView is null");
+            PbLog.debug(TAG, "evaluateJavaScript failure. mWebView is null");
             return;
         }
 
-        OXLog.debug(TAG, "evaluateJavaScript: " + script);
+        PbLog.debug(TAG, "evaluateJavaScript: " + script);
         try {
             String scriptToEvaluate = "javascript: if (window.mraid && (window.mraid.getState() != 'loading' ) && ( window.mraid.getState() != 'hidden') ) { " + script + " }";
             mScriptExecutionHandler.post(new EvaluateScriptRunnable(mWebView, scriptToEvaluate));
         }
         catch (Exception e) {
-            OXLog.error(TAG, "evaluateJavaScript failed for script " + script + Log.getStackTraceString(e));
+            PbLog.error(TAG, "evaluateJavaScript failed for script " + script + Log.getStackTraceString(e));
         }
     }
 
@@ -199,7 +199,7 @@ public class JsExecutor {
     @VisibleForTesting
     void evaluateMraidScript(final String script) {
         if (mWebView == null) {
-            OXLog.debug(TAG, "evaluateMraidScript failure. mWebView is null");
+            PbLog.debug(TAG, "evaluateMraidScript failure. mWebView is null");
             return;
         }
 
@@ -208,7 +208,7 @@ public class JsExecutor {
             mScriptExecutionHandler.post(new EvaluateScriptRunnable(mWebView, scriptToEvaluate));
         }
         catch (Exception e) {
-            OXLog.error(TAG, "evaluateMraidScript failed: " + Log.getStackTraceString(e));
+            PbLog.error(TAG, "evaluateMraidScript failed: " + Log.getStackTraceString(e));
         }
     }
 
@@ -228,7 +228,7 @@ public class JsExecutor {
         public void run() {
             WebView webView = mWeakAdView.get();
             if (webView == null) {
-                OXLog.error(TAG, "Failed to evaluate script. WebView is null");
+                PbLog.error(TAG, "Failed to evaluate script. WebView is null");
                 return;
             }
 
