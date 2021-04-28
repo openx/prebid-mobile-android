@@ -27,7 +27,7 @@ import org.prebid.mobile.rendering.models.internal.VisibilityTrackerResult;
 import org.prebid.mobile.rendering.utils.exposure.ViewExposure;
 import org.prebid.mobile.rendering.utils.exposure.ViewExposureChecker;
 import org.prebid.mobile.rendering.utils.helpers.VisibilityChecker;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 import org.prebid.mobile.rendering.views.webview.mraid.Views;
 
 import java.lang.ref.WeakReference;
@@ -67,7 +67,7 @@ public class CreativeVisibilityTracker {
         final View trackedView,
         final Set<VisibilityTrackerOption> visibilityTrackerOptionSet) {
         if (trackedView == null) {
-            PbLog.debug(TAG, "Tracked view can't be null");
+            LogUtil.debug(TAG, "Tracked view can't be null");
             return;
         }
 
@@ -120,20 +120,20 @@ public class CreativeVisibilityTracker {
         final View view) {
         final ViewTreeObserver originalViewTreeObserver = mWeakViewTreeObserver.get();
         if (originalViewTreeObserver != null && originalViewTreeObserver.isAlive()) {
-            PbLog.debug(TAG, "Original ViewTreeObserver is still alive.");
+            LogUtil.debug(TAG, "Original ViewTreeObserver is still alive.");
             return;
         }
 
         final View rootView = Views.getTopmostView(context, view);
         if (rootView == null) {
-            PbLog.debug(TAG, "Unable to set Visibility Tracker due to no available root view.");
+            LogUtil.debug(TAG, "Unable to set Visibility Tracker due to no available root view.");
             return;
         }
 
         final ViewTreeObserver viewTreeObserver = rootView.getViewTreeObserver();
         if (!viewTreeObserver.isAlive()) {
-            PbLog.debug(TAG, "Visibility Tracker was unable to track views because the"
-                             + " root view tree observer was not alive");
+            LogUtil.debug(TAG, "Visibility Tracker was unable to track views because the"
+                               + " root view tree observer was not alive");
             return;
         }
 
@@ -149,7 +149,7 @@ public class CreativeVisibilityTracker {
 
     public void startVisibilityCheck(Context context) {
         if (mTrackedView == null || mTrackedView.get() == null) {
-            PbLog.error(TAG, "Couldn't start visibility check. Target view is null");
+            LogUtil.error(TAG, "Couldn't start visibility check. Target view is null");
             return;
         }
         setViewTreeObserver(context, mTrackedView.get());

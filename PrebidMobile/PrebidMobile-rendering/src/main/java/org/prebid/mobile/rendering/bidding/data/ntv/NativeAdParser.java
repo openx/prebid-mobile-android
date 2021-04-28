@@ -23,7 +23,7 @@ import org.prebid.mobile.rendering.models.ntv.NativeEventTracker;
 import org.prebid.mobile.rendering.models.openrtb.bidRequests.Ext;
 import org.prebid.mobile.rendering.models.openrtb.bidRequests.assets.NativeAssetData;
 import org.prebid.mobile.rendering.models.openrtb.bidRequests.assets.NativeAssetImage;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class NativeAdParser {
             Ext ext = parseExt(admJson);
 
             if (assetArray == null) {
-                PbLog.error(TAG, "parse: Failed. Asset array is null. Returning null.");
+                LogUtil.error(TAG, "parse: Failed. Asset array is null. Returning null.");
                 return null;
             }
 
@@ -60,7 +60,7 @@ public class NativeAdParser {
             for (int i = 0; i < assetArray.length(); i++) {
                 JSONObject asset = assetArray.optJSONObject(i);
                 if (asset == null) {
-                    PbLog.debug(TAG, "parse: Skipping asset parse at index: " + i + ". Reason: asset is null");
+                    LogUtil.debug(TAG, "parse: Skipping asset parse at index: " + i + ". Reason: asset is null");
                     continue;
                 }
 
@@ -93,7 +93,7 @@ public class NativeAdParser {
                                 nativeAdEventTrackerList);
         }
         catch (JSONException e) {
-            PbLog.error(TAG, "parse: Failed. Returning null. Details: " + e);
+            LogUtil.error(TAG, "parse: Failed. Returning null. Details: " + e);
         }
 
         return null;

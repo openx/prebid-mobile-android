@@ -18,7 +18,7 @@ package org.prebid.mobile.rendering.mraid.methods;
 
 import android.content.Context;
 
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 import org.prebid.mobile.rendering.utils.url.UrlHandler;
 import org.prebid.mobile.rendering.utils.url.action.DeepLinkAction;
 import org.prebid.mobile.rendering.utils.url.action.DeepLinkPlusAction;
@@ -75,7 +75,7 @@ public class MraidUrlHandler {
                 @Override
                 public void onFailure(String url) {
                     mUrlHandleInProgress = false;
-                    PbLog.debug(TAG, "Failed to handleUrl: " + url);
+                    LogUtil.debug(TAG, "Failed to handleUrl: " + url);
                 }
             })
             .build();

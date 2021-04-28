@@ -26,7 +26,7 @@ import org.prebid.mobile.rendering.bidding.data.bid.Bid;
 import org.prebid.mobile.rendering.bidding.interfaces.InterstitialEventHandler;
 import org.prebid.mobile.rendering.bidding.listeners.InterstitialEventListener;
 import org.prebid.mobile.rendering.errors.AdException;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -136,7 +136,7 @@ public class GamInterstitialEventHandler implements InterstitialEventHandler, Ga
     private void primaryAdReceived() {
         if (mIsExpectingAppEvent) {
             if (mAppEventHandler != null) {
-                PbLog.debug(TAG, "primaryAdReceived: AppEventTimer is not null. Skipping timer scheduling.");
+                LogUtil.debug(TAG, "primaryAdReceived: AppEventTimer is not null. Skipping timer scheduling.");
                 return;
             }
 
@@ -149,7 +149,7 @@ public class GamInterstitialEventHandler implements InterstitialEventHandler, Ga
 
     private void handleAppEvent() {
         if (!mIsExpectingAppEvent) {
-            PbLog.debug(TAG, "appEventDetected: Skipping event handling. App event is not expected");
+            LogUtil.debug(TAG, "appEventDetected: Skipping event handling. App event is not expected");
             return;
         }
 

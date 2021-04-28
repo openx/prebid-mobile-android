@@ -53,7 +53,7 @@ import org.prebid.mobile.rendering.utils.helpers.AppInfoManager;
 import org.prebid.mobile.rendering.utils.helpers.HandlerQueueManager;
 import org.prebid.mobile.rendering.utils.helpers.MraidUtils;
 import org.prebid.mobile.rendering.utils.helpers.Utils;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 import org.prebid.mobile.rendering.views.webview.PrebidWebViewBase;
 import org.prebid.mobile.rendering.views.webview.WebViewBase;
 
@@ -130,7 +130,7 @@ public class BaseJSInterface implements JSInterface {
             return maxSize.toString();
         }
         catch (Exception e) {
-            PbLog.error(TAG, "Failed getMaxSize() for MRAID: " + Log.getStackTraceString(e));
+            LogUtil.error(TAG, "Failed getMaxSize() for MRAID: " + Log.getStackTraceString(e));
         }
 
         return "{}";
@@ -147,7 +147,7 @@ public class BaseJSInterface implements JSInterface {
             return position.toString();
         }
         catch (Exception e) {
-            PbLog.error(TAG, "Failed getScreenSize() for MRAID: " + Log.getStackTraceString(e));
+            LogUtil.error(TAG, "Failed getScreenSize() for MRAID: " + Log.getStackTraceString(e));
         }
 
         return "{}";
@@ -166,7 +166,7 @@ public class BaseJSInterface implements JSInterface {
             return position.toString();
         }
         catch (Exception e) {
-            PbLog.error(TAG, "Failed to get defaultPosition for MRAID: " + Log.getStackTraceString(e));
+            LogUtil.error(TAG, "Failed to get defaultPosition for MRAID: " + Log.getStackTraceString(e));
         }
 
         return "{}";
@@ -188,7 +188,7 @@ public class BaseJSInterface implements JSInterface {
             return position.toString();
         }
         catch (Exception e) {
-            PbLog.error(TAG, "Failed to get currentPosition for MRAID: " + Log.getStackTraceString(e));
+            LogUtil.error(TAG, "Failed to get currentPosition for MRAID: " + Log.getStackTraceString(e));
         }
         return "{}";
     }
@@ -241,14 +241,14 @@ public class BaseJSInterface implements JSInterface {
     @Override
     @JavascriptInterface
     public void expand() {
-        PbLog.debug(TAG, "Expand with no url");
+        LogUtil.debug(TAG, "Expand with no url");
         expand(null);
     }
 
     @Override
     @JavascriptInterface
     public void expand(final String url) {
-        PbLog.debug(TAG, "Expand with url: " + url);
+        LogUtil.debug(TAG, "Expand with url: " + url);
 
         mMraidEvent.mraidAction = ACTION_EXPAND;
         mMraidEvent.mraidActionHelper = url;
@@ -327,7 +327,7 @@ public class BaseJSInterface implements JSInterface {
     @JavascriptInterface
     public void shouldUseCustomClose(String useCustomClose) {
         mJsExecutor.executeNativeCallComplete();
-        PbLog.debug(TAG, "Deprecated: useCustomClose was deprecated in MRAID 3");
+        LogUtil.debug(TAG, "Deprecated: useCustomClose was deprecated in MRAID 3");
     }
 
     @Override
@@ -347,7 +347,7 @@ public class BaseJSInterface implements JSInterface {
                 return location.toString();
             }
             catch (JSONException e) {
-                PbLog.error(TAG, "MRAID: Error providing location: " + Log.getStackTraceString(e));
+                LogUtil.error(TAG, "MRAID: Error providing location: " + Log.getStackTraceString(e));
             }
         }
 
@@ -370,7 +370,7 @@ public class BaseJSInterface implements JSInterface {
             return deviceOrientationJson.toString();
         }
         catch (JSONException e) {
-            PbLog.error(TAG, "MRAID: Error providing deviceOrientationJson: " + Log.getStackTraceString(e));
+            LogUtil.error(TAG, "MRAID: Error providing deviceOrientationJson: " + Log.getStackTraceString(e));
         }
 
         return "{}";
@@ -379,14 +379,14 @@ public class BaseJSInterface implements JSInterface {
     @Override
     @JavascriptInterface
     public void unload() {
-        PbLog.debug(TAG, "unload called");
+        LogUtil.debug(TAG, "unload called");
         mMraidEvent.mraidAction = ACTION_UNLOAD;
         notifyMraidEventHandler();
     }
 
     public void onStateChange(String state) {
         if (state == null) {
-            PbLog.debug(TAG, "onStateChange failure. State is null");
+            LogUtil.debug(TAG, "onStateChange failure. State is null");
             return;
         }
         mOrientationBroadcastReceiver.setState(state);
@@ -465,7 +465,7 @@ public class BaseJSInterface implements JSInterface {
             supports(MraidVariableContainer.getDisabledFlags());
 
             updateScreenMetricsAsync(() -> {
-                PbLog.debug(TAG, "MRAID OnReadyExpanded Fired");
+                LogUtil.debug(TAG, "MRAID OnReadyExpanded Fired");
                 mJsExecutor.executeStateChange(STATE_EXPANDED);
                 mJsExecutor.executeOnReadyExpanded();
             });
@@ -507,7 +507,7 @@ public class BaseJSInterface implements JSInterface {
         mDefaultAdContainer = (PrebidWebViewBase) mAdBaseView.getPreloadedListener();
         // Determine which web view should be used for the current ad position
 
-        PbLog.debug(TAG, "updateMetrics()  Width: " + mAdBaseView.getWidth() + " Height: " + mAdBaseView.getHeight());
+        LogUtil.debug(TAG, "updateMetrics()  Width: " + mAdBaseView.getWidth() + " Height: " + mAdBaseView.getHeight());
         // Wait for the next draw pass on the default ad container and current web view
 
         mScreenMetricsWaiter.queueMetricsRequest(() -> {

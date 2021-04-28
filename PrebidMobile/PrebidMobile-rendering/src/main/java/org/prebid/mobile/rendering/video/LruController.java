@@ -19,7 +19,7 @@ package org.prebid.mobile.rendering.video;
 import android.content.Context;
 import android.util.LruCache;
 
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -64,12 +64,12 @@ public class LruController {
                 os.write(data);
                 os.close();
                 mLruCache.remove(videoPath);
-                PbLog.debug(TAG, "Cache saved to file");
+                LogUtil.debug(TAG, "Cache saved to file");
                 return true;
             }
 
             catch (Exception e) {
-                PbLog.error(TAG, "Failed to save cache to file: " + e.getMessage());
+                LogUtil.error(TAG, "Failed to save cache to file: " + e.getMessage());
             }
         }
         return false;

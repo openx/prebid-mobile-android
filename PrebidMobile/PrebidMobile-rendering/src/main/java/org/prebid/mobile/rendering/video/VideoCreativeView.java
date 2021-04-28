@@ -26,7 +26,7 @@ import org.prebid.mobile.rendering.errors.AdException;
 import org.prebid.mobile.rendering.listeners.VideoCreativeViewListener;
 import org.prebid.mobile.rendering.models.ViewPool;
 import org.prebid.mobile.rendering.utils.helpers.Dips;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 import org.prebid.mobile.rendering.utils.url.UrlHandler;
 import org.prebid.mobile.rendering.utils.url.action.BrowserAction;
 import org.prebid.mobile.rendering.utils.url.action.DeepLinkAction;
@@ -63,7 +63,7 @@ public class VideoCreativeView extends RelativeLayout {
 
     public void setVideoUri(Uri videoUri) {
         if (videoUri == null) {
-            PbLog.error(TAG, "setVideoUri: Failed. Provided uri is null.");
+            LogUtil.error(TAG, "setVideoUri: Failed. Provided uri is null.");
             return;
         }
 
@@ -212,7 +212,7 @@ public class VideoCreativeView extends RelativeLayout {
 
     private void handleCallToActionClick() {
         if (mUrlHandleInProgress) {
-            PbLog.debug(TAG, "handleCallToActionClick: Skipping. Url handle in progress");
+            LogUtil.debug(TAG, "handleCallToActionClick: Skipping. Url handle in progress");
             return;
         }
         mUrlHandleInProgress = true;
@@ -242,7 +242,7 @@ public class VideoCreativeView extends RelativeLayout {
                 @Override
                 public void onFailure(String url) {
                     mUrlHandleInProgress = false;
-                    PbLog.debug(TAG, "Failed to handleUrl: " + url + ". Handling fallback");
+                    LogUtil.debug(TAG, "Failed to handleUrl: " + url + ". Handling fallback");
                 }
             })
             .build();

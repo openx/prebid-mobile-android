@@ -32,7 +32,7 @@ import org.prebid.mobile.rendering.models.internal.VisibilityTrackerResult;
 import org.prebid.mobile.rendering.models.ntv.NativeEventTracker;
 import org.prebid.mobile.rendering.utils.constants.IntentActions;
 import org.prebid.mobile.rendering.utils.helpers.Utils;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 import org.prebid.mobile.rendering.video.VideoCreativeView;
 import org.prebid.mobile.rendering.views.AdViewManager;
 import org.prebid.mobile.rendering.views.AdViewManagerListener;
@@ -185,7 +185,7 @@ public class VideoView extends BaseAdView {
 
     public void pause() {
         if (!canPause()) {
-            PbLog.debug(TAG, "pause() can't pause " + mVideoViewState);
+            LogUtil.debug(TAG, "pause() can't pause " + mVideoViewState);
             return;
         }
 
@@ -195,7 +195,7 @@ public class VideoView extends BaseAdView {
 
     public void resume() {
         if (!canResume()) {
-            PbLog.debug(TAG, "resume() can't resume " + mVideoViewState);
+            LogUtil.debug(TAG, "resume() can't resume " + mVideoViewState);
             return;
         }
 
@@ -205,7 +205,7 @@ public class VideoView extends BaseAdView {
 
     public void play() {
         if (!canPlay()) {
-            PbLog.debug(TAG, "play() can't play " + mVideoViewState);
+            LogUtil.debug(TAG, "play() can't play " + mVideoViewState);
             return;
         }
 
@@ -288,7 +288,7 @@ public class VideoView extends BaseAdView {
     private void showWatchAgain() {
         View watchAgainButton = Utils.createWatchAgainView(getContext());
         if (watchAgainButton == null) {
-            PbLog.debug(TAG, "showWatchAgain: Failed. WatchAgainView is null");
+            LogUtil.debug(TAG, "showWatchAgain: Failed. WatchAgainView is null");
             return;
         }
 
@@ -330,7 +330,7 @@ public class VideoView extends BaseAdView {
 
         if (isVisible && canPlay()) {
             play();
-            PbLog.debug(TAG, "handleVisibilityChange: auto show " + mVideoViewState);
+            LogUtil.debug(TAG, "handleVisibilityChange: auto show " + mVideoViewState);
             return;
         }
 
@@ -341,12 +341,12 @@ public class VideoView extends BaseAdView {
         if (!isVisible && canPause()) {
             mAdViewManager.pause();
             changeState(State.PAUSED_AUTO);
-            PbLog.debug(TAG, "handleVisibilityChange: auto pause " + mVideoViewState);
+            LogUtil.debug(TAG, "handleVisibilityChange: auto pause " + mVideoViewState);
         }
         else if (isVisible && isInState(State.PAUSED_AUTO)) {
             mAdViewManager.resume();
             changeState(State.PLAYING);
-            PbLog.debug(TAG, "handleVisibilityChange: auto resume " + mVideoViewState);
+            LogUtil.debug(TAG, "handleVisibilityChange: auto resume " + mVideoViewState);
         }
     }
 

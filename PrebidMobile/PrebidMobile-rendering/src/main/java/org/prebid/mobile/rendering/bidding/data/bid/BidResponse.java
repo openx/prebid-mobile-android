@@ -25,7 +25,7 @@ import org.json.JSONObject;
 import org.prebid.mobile.rendering.models.openrtb.bidRequests.Ext;
 import org.prebid.mobile.rendering.utils.helpers.Dips;
 import org.prebid.mobile.rendering.utils.helpers.Utils;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -130,7 +130,7 @@ public class BidResponse {
             if (getWinningBid() == null) {
                 mHasParseError = true;
                 mParseError = "Failed to parse bids. No winning bids were found.";
-                PbLog.info(TAG, mParseError);
+                LogUtil.info(TAG, mParseError);
             }
 
             mCreationTime = System.currentTimeMillis();
@@ -138,7 +138,7 @@ public class BidResponse {
         catch (JSONException e) {
             mHasParseError = true;
             mParseError = "Failed to parse JSON String: " + e.getMessage();
-            PbLog.error(TAG, mParseError);
+            LogUtil.error(TAG, mParseError);
         }
     }
 

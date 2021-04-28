@@ -16,7 +16,7 @@
 
 package org.prebid.mobile.rendering.networking.tracking;
 
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ public class TrackingManager {
 
     public void fireEventTrackingURLs(@Nullable List<String> urls) {
         if (urls == null) {
-            PbLog.debug(TAG, "fireEventTrackingURLs(): Unable to execute event tracking requests. Provided list is null");
+            LogUtil.debug(TAG, "fireEventTrackingURLs(): Unable to execute event tracking requests. Provided list is null");
             return;
         }
         for (String url : urls) {

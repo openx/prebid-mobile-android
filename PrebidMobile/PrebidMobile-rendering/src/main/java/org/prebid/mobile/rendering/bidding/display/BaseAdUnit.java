@@ -29,7 +29,7 @@ import org.prebid.mobile.rendering.bidding.loader.BidLoader;
 import org.prebid.mobile.rendering.errors.AdException;
 import org.prebid.mobile.rendering.models.AdConfiguration;
 import org.prebid.mobile.rendering.sdk.PrebidRenderingSettings;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -73,24 +73,24 @@ abstract class BaseAdUnit {
         @NonNull
             OnFetchCompleteListener listener) {
         if (!isAdObjectSupported(adObject)) {
-            PbLog.error(TAG, "Demand fetch failed. MoPub view have to be passed in arguments.");
+            LogUtil.error(TAG, "Demand fetch failed. MoPub view have to be passed in arguments.");
             listener.onComplete(FetchDemandResult.INVALID_AD_OBJECT);
             return;
         }
         if (TextUtils.isEmpty(PrebidRenderingSettings.getAccountId())) {
-            PbLog.error(TAG, "Empty account id");
+            LogUtil.error(TAG, "Empty account id");
             listener.onComplete(FetchDemandResult.INVALID_ACCOUNT_ID);
             return;
         }
         if (TextUtils.isEmpty(mAdUnitConfig.getConfigId())) {
-            PbLog.error(TAG, "Empty config id");
+            LogUtil.error(TAG, "Empty config id");
             listener.onComplete(FetchDemandResult.INVALID_CONFIG_ID);
             return;
         }
 
         final Host bidServerHost = PrebidRenderingSettings.getBidServerHost();
         if (bidServerHost.equals(Host.CUSTOM) && bidServerHost.getHostUrl().isEmpty()) {
-            PbLog.error(TAG, "Empty host url for custom Prebid Server host.");
+            LogUtil.error(TAG, "Empty host url for custom Prebid Server host.");
             listener.onComplete(FetchDemandResult.INVALID_HOST_URL);
             return;
         }
@@ -155,7 +155,7 @@ abstract class BaseAdUnit {
     protected void onResponseReceived(BidResponse response) {
         if (mAdViewReference.get() == null || mOnFetchCompleteListener == null) {
             mBidLoader.cancelRefresh();
-            PbLog.error(TAG, "Failed to pass callback. Ad object or OnFetchCompleteListener is null");
+            LogUtil.error(TAG, "Failed to pass callback. Ad object or OnFetchCompleteListener is null");
             return;
         }
         BidResponseCache.getInstance().putBidResponse(response);
@@ -167,7 +167,7 @@ abstract class BaseAdUnit {
     protected void onErrorReceived(AdException exception) {
         if (mAdViewReference.get() == null || mOnFetchCompleteListener == null) {
             mBidLoader.cancelRefresh();
-            PbLog.error(TAG, "Failed to pass callback. Ad object or OnFetchCompleteListener is null");
+            LogUtil.error(TAG, "Failed to pass callback. Ad object or OnFetchCompleteListener is null");
             return;
         }
         mOnFetchCompleteListener.onComplete(FetchDemandResult.parseErrorMessage(exception.getMessage()));

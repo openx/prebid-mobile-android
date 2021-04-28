@@ -28,7 +28,7 @@ import org.prebid.mobile.rendering.bidding.data.bid.Bid;
 import org.prebid.mobile.rendering.bidding.interfaces.BannerEventHandler;
 import org.prebid.mobile.rendering.bidding.listeners.BannerEventListener;
 import org.prebid.mobile.rendering.errors.AdException;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 
 import androidx.annotation.NonNull;
 
@@ -129,7 +129,7 @@ public class GamBannerEventHandler implements BannerEventHandler, GamAdEventList
         mIsExpectingAppEvent = false;
 
         if (mRequestBanner != null) {
-            PbLog.error(TAG, "requestAdWithBid: Failed. Request to primaryAdServer is in progress.");
+            LogUtil.error(TAG, "requestAdWithBid: Failed. Request to primaryAdServer is in progress.");
             return;
         }
 
@@ -175,7 +175,7 @@ public class GamBannerEventHandler implements BannerEventHandler, GamAdEventList
     private void primaryAdReceived() {
         if (mIsExpectingAppEvent) {
             if (mAppEventHandler != null) {
-                PbLog.debug(TAG, "primaryAdReceived: AppEventTimer is not null. Skipping timer scheduling.");
+                LogUtil.debug(TAG, "primaryAdReceived: AppEventTimer is not null. Skipping timer scheduling.");
                 return;
             }
 
@@ -193,7 +193,7 @@ public class GamBannerEventHandler implements BannerEventHandler, GamAdEventList
 
     private void handleAppEvent() {
         if (!mIsExpectingAppEvent) {
-            PbLog.debug(TAG, "appEventDetected: Skipping event handling. App event is not expected");
+            LogUtil.debug(TAG, "appEventDetected: Skipping event handling. App event is not expected");
             return;
         }
 

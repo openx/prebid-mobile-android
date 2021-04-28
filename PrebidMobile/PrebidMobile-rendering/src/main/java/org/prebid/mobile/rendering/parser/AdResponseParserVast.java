@@ -22,7 +22,7 @@ import android.util.Xml;
 import org.prebid.mobile.rendering.errors.VastParseError;
 import org.prebid.mobile.rendering.networking.parameters.BasicParameterBuilder;
 import org.prebid.mobile.rendering.utils.helpers.Utils;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 import org.prebid.mobile.rendering.video.VideoAdEvent;
 import org.prebid.mobile.rendering.video.vast.Ad;
 import org.prebid.mobile.rendering.video.vast.AdVerifications;
@@ -585,7 +585,7 @@ public class AdResponseParserVast extends AdResponseParserBase {
                     }
                 }
                 catch (IllegalArgumentException e) {
-                    PbLog.error(TAG, e.getMessage());
+                    LogUtil.error(TAG, e.getMessage());
                 }
             }
         }

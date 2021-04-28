@@ -48,7 +48,7 @@ import org.prebid.mobile.rendering.models.ntv.NativeEventTracker;
 import org.prebid.mobile.rendering.sdk.PrebidRenderingSettings;
 import org.prebid.mobile.rendering.utils.broadcast.ScreenStateReceiver;
 import org.prebid.mobile.rendering.utils.helpers.VisibilityChecker;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 import org.prebid.mobile.rendering.views.webview.mraid.Views;
 
 import java.util.Map;
@@ -234,12 +234,12 @@ public class BannerView extends FrameLayout {
      */
     public void loadAd() {
         if (mBidLoader == null) {
-            PbLog.error(TAG, "loadAd: Failed. BidLoader is not initialized.");
+            LogUtil.error(TAG, "loadAd: Failed. BidLoader is not initialized.");
             return;
         }
 
         if (mIsPrimaryAdServerRequestInProgress) {
-            PbLog.debug(TAG, "loadAd: Skipped. Loading is in progress.");
+            LogUtil.debug(TAG, "loadAd: Skipped. Loading is in progress.");
             return;
         }
 
@@ -283,11 +283,11 @@ public class BannerView extends FrameLayout {
     //region ==================== getters and setters
     public void setAutoRefreshDelay(int seconds) {
         if (!mAdUnitConfig.isAdType(AdConfiguration.AdUnitIdentifierType.BANNER)) {
-            PbLog.info(TAG, "Autorefresh is available only for Banner ad type");
+            LogUtil.info(TAG, "Autorefresh is available only for Banner ad type");
             return;
         }
         if (seconds < 0) {
-            PbLog.error(TAG, "setRefreshIntervalInSec: Failed. Refresh interval must be >= 0");
+            LogUtil.error(TAG, "setRefreshIntervalInSec: Failed. Refresh interval must be >= 0");
             return;
         }
         mAdUnitConfig.setAutoRefreshDelay(seconds);
@@ -391,7 +391,7 @@ public class BannerView extends FrameLayout {
 
     private void reflectAttrs(AttributeSet attrs) {
         if (attrs == null) {
-            PbLog.debug(TAG, "reflectAttrs. No attributes provided.");
+            LogUtil.debug(TAG, "reflectAttrs. No attributes provided.");
             return;
         }
         TypedArray typedArray = getContext()

@@ -28,7 +28,7 @@ import org.prebid.mobile.rendering.errors.AdException;
 import org.prebid.mobile.rendering.models.AdConfiguration;
 import org.prebid.mobile.rendering.models.AdPosition;
 import org.prebid.mobile.rendering.sdk.PrebidRenderingSettings;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -121,12 +121,12 @@ public abstract class BaseInterstitialAdUnit {
      */
     public void loadAd() {
         if (mBidLoader == null) {
-            PbLog.error(TAG, "loadAd: Failed. BidLoader is not initialized.");
+            LogUtil.error(TAG, "loadAd: Failed. BidLoader is not initialized.");
             return;
         }
 
         if (!isAdLoadAllowed()) {
-            PbLog.debug(TAG, "loadAd: Skipped. InterstitialAdUnitState is: " + mInterstitialAdUnitState);
+            LogUtil.debug(TAG, "loadAd: Skipped. InterstitialAdUnitState is: " + mInterstitialAdUnitState);
             return;
         }
 
@@ -145,7 +145,7 @@ public abstract class BaseInterstitialAdUnit {
      */
     public void show() {
         if (!isAuctionWinnerReadyToDisplay()) {
-            PbLog.debug(TAG, "show(): Ad is not yet ready for display!");
+            LogUtil.debug(TAG, "show(): Ad is not yet ready for display!");
             return;
         }
 

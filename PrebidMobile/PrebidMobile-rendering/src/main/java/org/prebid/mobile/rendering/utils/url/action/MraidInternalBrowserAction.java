@@ -26,7 +26,7 @@ import org.prebid.mobile.rendering.mraid.methods.network.RedirectUrlListener;
 import org.prebid.mobile.rendering.sdk.PrebidRenderingSettings;
 import org.prebid.mobile.rendering.utils.helpers.ExternalViewerUtils;
 import org.prebid.mobile.rendering.utils.helpers.Utils;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 import org.prebid.mobile.rendering.utils.url.ActionNotResolvedException;
 import org.prebid.mobile.rendering.utils.url.UrlHandler;
 import org.prebid.mobile.rendering.views.webview.mraid.BaseJSInterface;
@@ -74,7 +74,7 @@ public class MraidInternalBrowserAction implements UrlAction {
             @Override
             public void onSuccess(String url, String contentType) {
                 if (Utils.isMraidActionUrl(url) && context != null) {
-                    PbLog.debug(TAG, "Redirection succeeded");
+                    LogUtil.debug(TAG, "Redirection succeeded");
 
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -83,7 +83,7 @@ public class MraidInternalBrowserAction implements UrlAction {
                         context.getApplicationContext().startActivity(intent);
                     }
                     catch (ActivityNotFoundException e) {
-                        PbLog.error(TAG, "Unable to open url " + url + ". Activity was not found");
+                        LogUtil.error(TAG, "Unable to open url " + url + ". Activity was not found");
                     }
                 }
                 else if (url != null && (url.startsWith(PrebidRenderingSettings.SCHEME_HTTP) || url.startsWith(PrebidRenderingSettings.SCHEME_HTTPS))) {
@@ -99,7 +99,7 @@ public class MraidInternalBrowserAction implements UrlAction {
             @Override
             public void onFailed() {
                 // Nothing to do
-                PbLog.debug(TAG, "Open: redirection failed");
+                LogUtil.debug(TAG, "Open: redirection failed");
             }
         });
     }

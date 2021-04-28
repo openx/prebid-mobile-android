@@ -22,7 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 import org.prebid.mobile.rendering.views.interstitial.InterstitialManager;
 import org.prebid.mobile.rendering.views.webview.PrebidWebViewBase;
 import org.prebid.mobile.rendering.views.webview.WebViewBase;
@@ -61,14 +61,14 @@ public class AdExpandedDialog extends AdBaseDialog {
                         ((Activity) context).setRequestedOrientation(mInitialOrientation);
                     }
                     else {
-                        PbLog.error(TAG, "Context is not Activity, can not set orientation");
+                        LogUtil.error(TAG, "Context is not Activity, can not set orientation");
                     }
 
                     mWebViewBase.getMRAIDInterface().onStateChange(JSInterface.STATE_DEFAULT);
                 }
             }
             catch (Exception e) {
-                PbLog.error(TAG, "Expanded ad closed but post-close events failed: " + Log.getStackTraceString(e));
+                LogUtil.error(TAG, "Expanded ad closed but post-close events failed: " + Log.getStackTraceString(e));
             }
         });
 

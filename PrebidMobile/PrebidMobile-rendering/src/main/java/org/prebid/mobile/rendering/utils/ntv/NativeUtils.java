@@ -22,7 +22,7 @@ import org.prebid.mobile.rendering.bidding.data.ntv.NativeAd;
 import org.prebid.mobile.rendering.bidding.data.ntv.NativeAdParser;
 import org.prebid.mobile.rendering.bidding.display.BidResponseCache;
 import org.prebid.mobile.rendering.bidding.listeners.NativeAdCallback;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 
 import java.util.Map;
 
@@ -39,7 +39,7 @@ public class NativeUtils {
 
         final Map<String, String> keyWordsMap = fetchDemandResult.getKeyWordsMap();
         if (keyWordsMap == null || keyWordsMap.isEmpty()) {
-            PbLog.error(TAG, "findNativeAd: Failed. Callback or keyword map is null.");
+            LogUtil.error(TAG, "findNativeAd: Failed. Callback or keyword map is null.");
             return;
         }
 
@@ -47,7 +47,7 @@ public class NativeUtils {
         final BidResponse bidResponse = BidResponseCache.getInstance().popBidResponse(responseId);
 
         if (bidResponse == null || bidResponse.getWinningBid() == null) {
-            PbLog.debug(TAG, "findNativeAd: Returning null. BidResponse is null or winning bid is null.");
+            LogUtil.debug(TAG, "findNativeAd: Returning null. BidResponse is null or winning bid is null.");
             callback.onNativeAdReceived(null);
             return;
         }

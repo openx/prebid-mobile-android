@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import org.prebid.mobile.rendering.bidding.data.bid.Bid;
 import org.prebid.mobile.rendering.bidding.data.bid.BidResponse;
 import org.prebid.mobile.rendering.networking.tracking.ServerConnection;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -66,13 +66,13 @@ public class WinNotifier {
 
         @Override
         public void onError(String msg, long responseTime) {
-            PbLog.error(TAG, "Failed to send win event: " + msg);
+            LogUtil.error(TAG, "Failed to send win event: " + msg);
             sendNextWinRequest();
         }
 
         @Override
         public void onErrorWithException(Exception e, long responseTime) {
-            PbLog.error(TAG, "Failed to send win event: " + e.getMessage());
+            LogUtil.error(TAG, "Failed to send win event: " + e.getMessage());
             sendNextWinRequest();
         }
     };
@@ -125,7 +125,7 @@ public class WinNotifier {
         }
         else {
             // Fire async event and wait for its result
-            PbLog.debug(TAG, "Bid.adm is null or empty. Getting the ad from prebid cache");
+            LogUtil.debug(TAG, "Bid.adm is null or empty. Getting the ad from prebid cache");
             ServerConnection.fireWithResult(winUrl, mWinResponseHandler);
         }
     }

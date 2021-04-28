@@ -27,7 +27,7 @@ import org.prebid.mobile.rendering.bidding.listeners.InterstitialAdUnitListener;
 import org.prebid.mobile.rendering.bidding.listeners.InterstitialEventListener;
 import org.prebid.mobile.rendering.errors.AdException;
 import org.prebid.mobile.rendering.models.AdConfiguration;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -170,7 +170,7 @@ public class InterstitialAdUnit extends BaseInterstitialAdUnit {
     @Override
     void notifyAdEventListener(AdListenerEvent adListenerEvent) {
         if (mInterstitialAdUnitListener == null) {
-            PbLog.debug(TAG, "notifyAdEventListener: Failed. AdUnitListener is null. Passed listener event: " + adListenerEvent);
+            LogUtil.debug(TAG, "notifyAdEventListener: Failed. AdUnitListener is null. Passed listener event: " + adListenerEvent);
             return;
         }
 
@@ -204,7 +204,7 @@ public class InterstitialAdUnit extends BaseInterstitialAdUnit {
             case VIDEO:
                 return AdConfiguration.AdUnitIdentifierType.VAST;
             default:
-                PbLog.debug(TAG, "setAdUnitIdentifierType: Provided AdUnitType [" + adUnitFormat + "] doesn't match any expected adUnitType.");
+                LogUtil.debug(TAG, "setAdUnitIdentifierType: Provided AdUnitType [" + adUnitFormat + "] doesn't match any expected adUnitType.");
                 return null;
         }
     }

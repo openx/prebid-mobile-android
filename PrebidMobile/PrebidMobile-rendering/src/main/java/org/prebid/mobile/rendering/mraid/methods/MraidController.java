@@ -27,7 +27,7 @@ import org.prebid.mobile.rendering.models.AdConfiguration;
 import org.prebid.mobile.rendering.models.HTMLCreative;
 import org.prebid.mobile.rendering.models.internal.MraidEvent;
 import org.prebid.mobile.rendering.utils.helpers.Utils;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 import org.prebid.mobile.rendering.views.interstitial.InterstitialManager;
 import org.prebid.mobile.rendering.views.webview.PrebidWebViewBase;
 import org.prebid.mobile.rendering.views.webview.WebViewBase;
@@ -132,7 +132,7 @@ public class MraidController {
         switch (event.mraidAction) {
             case ACTION_EXPAND:
                 if (Utils.isBlank(event.mraidActionHelper)) {
-                    PbLog.debug(TAG, "One part expand");
+                    LogUtil.debug(TAG, "One part expand");
                     expand(oldWebViewBase, twoPartNewWebViewBase, event);
                 }
                 else {
@@ -182,7 +182,7 @@ public class MraidController {
                 mMraidExpand.getInterstitialViewController().handleSetOrientationProperties();
             }
             catch (AdException e) {
-                PbLog.error(TAG, Log.getStackTraceString(e));
+                LogUtil.error(TAG, Log.getStackTraceString(e));
             }
         }
     }
@@ -299,7 +299,7 @@ public class MraidController {
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(() -> {
             try {
-                PbLog.debug(TAG, "mraidExpand");
+                LogUtil.debug(TAG, "mraidExpand");
                 //send click event on expand
                 ((WebViewBase) adBaseView).sendClickCallBack(mraidEvent.mraidActionHelper);
                 mMraidExpand.expand(mraidEvent.mraidActionHelper, () -> {
@@ -312,7 +312,7 @@ public class MraidController {
                 });
             }
             catch (Exception e) {
-                PbLog.error(TAG, "mraidExpand failed at displayViewInInterstitial: " + Log.getStackTraceString(e));
+                LogUtil.error(TAG, "mraidExpand failed at displayViewInInterstitial: " + Log.getStackTraceString(e));
             }
         });
     }

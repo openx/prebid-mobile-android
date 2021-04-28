@@ -44,7 +44,7 @@ import org.prebid.mobile.rendering.sdk.deviceData.managers.UserConsentManager;
 import org.prebid.mobile.rendering.utils.helpers.AdIdManager;
 import org.prebid.mobile.rendering.utils.helpers.AppInfoManager;
 import org.prebid.mobile.rendering.utils.helpers.ExternalViewerUtils;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -132,7 +132,7 @@ public abstract class Requester {
     protected abstract PathBuilderBase getPathBuilder();
 
     private void sendAdException(String logMsg, String exceptionMsg) {
-        PbLog.warn(TAG, logMsg);
+        LogUtil.warn(TAG, logMsg);
         AdException adException = new AdException(AdException.INIT_ERROR, exceptionMsg);
         mAdResponseCallBack.onErrorWithException(adException, 0);
     }
@@ -189,20 +189,20 @@ public abstract class Requester {
 
         @Override
         public void adIdFetchCompletion() {
-            PbLog.info(TAG, "adIdFetchCompletion");
+            LogUtil.info(TAG, "adIdFetchCompletion");
             makeAdRequest();
         }
 
         @Override
         public void adIdFetchFailure() {
-            PbLog.warn(TAG, "adIdFetchFailure");
+            LogUtil.warn(TAG, "adIdFetchFailure");
             makeAdRequest();
         }
 
         private void makeAdRequest() {
             Requester requester = mWeakRequester.get();
             if (requester == null) {
-                PbLog.warn(TAG, "Requester is null");
+                LogUtil.warn(TAG, "Requester is null");
                 return;
             }
 

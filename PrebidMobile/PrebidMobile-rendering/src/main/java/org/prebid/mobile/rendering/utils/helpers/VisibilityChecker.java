@@ -24,7 +24,7 @@ import android.view.ViewParent;
 import org.prebid.mobile.rendering.models.internal.VisibilityTrackerOption;
 import org.prebid.mobile.rendering.utils.exposure.ViewExposure;
 import org.prebid.mobile.rendering.utils.exposure.ViewExposureChecker;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 
 import androidx.annotation.Nullable;
 
@@ -135,7 +135,7 @@ public class VisibilityChecker {
         }
 
         ViewExposure exposure = mViewExposureChecker.exposure(view);
-        PbLog.debug(TAG, exposure != null ? exposure.toString() : "null exposure");
+        LogUtil.debug(TAG, exposure != null ? exposure.toString() : "null exposure");
         return exposure;
     }
 

@@ -28,7 +28,7 @@ import org.prebid.mobile.rendering.models.internal.VastExtractorResult;
 import org.prebid.mobile.rendering.models.ntv.NativeAdConfiguration;
 import org.prebid.mobile.rendering.networking.tracking.TrackingManager;
 import org.prebid.mobile.rendering.utils.helpers.MacrosResolutionHelper;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 import org.prebid.mobile.rendering.video.OmEventTracker;
 
 import java.util.ArrayList;
@@ -116,7 +116,7 @@ public class CreativeModelMakerBids {
         String html = "";
 
         if (bid == null) {
-            PbLog.error(TAG, "getAdHtml: Failed. Bid is null. Returning empty string.");
+            LogUtil.error(TAG, "getAdHtml: Failed. Bid is null. Returning empty string.");
             return html;
         }
 

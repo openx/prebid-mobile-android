@@ -18,7 +18,7 @@ package org.prebid.mobile.rendering.models;
 
 import org.prebid.mobile.rendering.networking.tracking.TrackingManager;
 import org.prebid.mobile.rendering.session.manager.OmAdSessionManager;
-import org.prebid.mobile.rendering.utils.logger.PbLog;
+import org.prebid.mobile.rendering.utils.logger.LogUtil;
 import org.prebid.mobile.rendering.video.OmEventTracker;
 import org.prebid.mobile.rendering.video.VideoAdEvent;
 
@@ -104,7 +104,7 @@ public class CreativeModel {
         ArrayList<String> trackingUrls = mTrackingURLs.get(event);
 
         if (trackingUrls == null || trackingUrls.isEmpty()) {
-            PbLog.debug(TAG, "Event" + event + ": url not found for tracking");
+            LogUtil.debug(TAG, "Event" + event + ": url not found for tracking");
             return;
         }
 
