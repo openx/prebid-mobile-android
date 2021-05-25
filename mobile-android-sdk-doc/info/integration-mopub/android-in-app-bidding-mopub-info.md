@@ -1,10 +1,9 @@
 # MoPub Integration
 
-The integration of Prebid Rendering SDK with MoPub assumes that publisher has an account on MoPub and has already integrated the MoPub SDK into the app project.
+The integration of Prebid Rendering Module with MoPub assumes that publisher has an account on MoPub and has already integrated the MoPub SDK into the app project.
 
-If you do not have MoPub SDK in the app yet, refer the the [MoPub's Documentation](https://github.com/mopub/mopub-android-sdk).
+If you do not have MoPub SDK in the app yet, refer the [MoPub's Documentation](https://github.com/mopub/mopub-android-sdk).
 
-If you have any troubles with integration contact [Prebid Support](https://docs.prebid.org/support/index.html).
 
 ## MoPub Integration Overview
 
@@ -12,9 +11,9 @@ The integration of header bidding into MoPub monetization is based on MoPub's Me
 
 <img src="../res/Prebid-In-App-Bidding-Overview-MoPub.png" alt="Pipeline Screenshot" align="center">
 
-**Steps 1-2** Prebid Rendering SDK makes a bid request. Prebid server runs an auction and returns the winning bid to the SDK.
+**Steps 1-2** Prebid Rendering Module makes a bid request. Prebid server runs an auction and returns the winning bid to the SDK.
 
-**Step 3** Prebid Rendering SDK via MoPub Adapters Framework sets up targeting keywords into the MoPub's ad unit.
+**Step 3** Prebid Rendering Module via MoPub Adapters Framework sets up targeting keywords into the MoPub's ad unit.
 
 **Step 4** MoPub SDK makes an ad request. MoPub returns the winner of the waterfall.
 
@@ -22,7 +21,7 @@ The integration of header bidding into MoPub monetization is based on MoPub's Me
 
 **Step 6** The winner is displayed in the App with the respective rendering engine.
 
-Prebid Rendering SDK provides ability to integrate header bidding for these ad kinds:
+Prebid Rendering Module provides ability to integrate header bidding for these ad kinds:
 
 - Display Banner
 - Display Interstitial
@@ -39,7 +38,7 @@ They can be integrated using these API categories.
 - [**Native API**](android-in-app-bidding-mopub-native-integration.md)
 
 
-## Init Prebid Rendering SDK
+## Init Prebid Rendering Module
 
 Provide an **Account Id** of your organization on Prebid server:
 
@@ -54,9 +53,10 @@ The account ID is an identifier of the **Stored Request**.
 
 ### Prebid Adapters
 
-Adapters for Prebid Rendering SDK are open source classes that serve like proxies between MoPub SDK and any other one. For more details about Mediation and Adapters read the [MoPub's Documentation](https://developers.mopub.com/networks/integrate/mopub-network-mediation-guidelines/).
+Adapters for Prebid Rendering Module are classes that serve like proxies between MoPub SDK and any other one. For more details about Mediation and Adapters read the [MoPub's Documentation](https://developers.mopub.com/networks/integrate/mopub-network-mediation-guidelines/).
 
-To integrate adapters for In-App Bidding SDK just add the following lines in your build.gradle files:
+To integrate adapters for the Prebid Rendering Module just add the following lines in your build.gradle files:
+
 Root build.gradle
 
 ```
@@ -111,7 +111,7 @@ private fun fetchAdUnit(configId: String, size: AdSize) {
 
 #### Step 1: Create Ad View
 
-In the scenario with MoPub integration the MoPub's SDK plays the central role in managing ad views in the application's UI. You have to create and place MoPub's Ad View into the app page. If a winning bid on Prebid wins in the MoPub waterfall it will be rendered via Mediation in the place of original MoPub's Ad View by Prebid Rendering SDK.
+In the scenario with MoPub integration the MoPub's SDK plays the central role in managing ad views in the application's UI. You have to create and place MoPub's Ad View into the app page. If a winning bid on Prebid wins in the MoPub waterfall it will be rendered via Mediation in the place of original MoPub's Ad View by Prebid Rendering Module.
 
 #### Step 2: Create Ad Unit
 
@@ -205,7 +205,7 @@ moPubInterstitial?.show()
 
 #### Step 1: Create Ad View
 
-In the scenario with MoPub integration the MoPub SDK plays the central role in managing ad views in the application's UI. If a winning bid on Prebid wins in the MoPub waterfall it will be rendered via Mediation by Prebid Rendering SDK.
+In the scenario with MoPub integration the MoPub SDK plays the central role in managing ad views in the application's UI. If a winning bid on Prebid wins in the MoPub waterfall it will be rendered via Mediation by Prebid Rendering Module.
 
 #### Step 2: Create Ad Unit
 

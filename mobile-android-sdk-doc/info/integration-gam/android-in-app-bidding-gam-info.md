@@ -1,6 +1,6 @@
 # Google Ad Manager Integration
 
-The integration of Prebid Rendering SDK with Google Ad Manager (GAM) assumes that publisher has an account on GAM and has already integrated the GAM SDK into the app project. Prebid Rendering SDK was tested with **GAM SDK 7.61.0**. If you have any trouble with this or other versions, please, contact the [Prebid Support](https://docs.prebid.org/support/index.html).
+The integration of Prebid Rendering Module with Google Ad Manager (GAM) assumes that publisher has an account on GAM and has already integrated the Google Mobile Ads SDK (GMA SDK) into the app project. Prebid Rendering Module was tested with **GAM SDK 7.61.0**. 
 
 If you do not have GAM SDK in the app yet, refer the the [Google Integration Documentation](https://developers.google.com/ad-manager/mobile-ads-sdk/android/quick-start).
 
@@ -8,18 +8,17 @@ If you do not have GAM SDK in the app yet, refer the the [Google Integration Doc
 
 <img src="../res/Prebid-In-App-Bidding-Overview-GAM.png" alt="Pipeline Screenshot" align="center">
 
-**Steps 1-2** Prebid Rendering SDK makes a bid request. Prebid server runs an auction and returns the winning bid to the SDK.
+**Steps 1-2** Prebid Rendering Module makes a bid request. Prebid server runs an auction and returns the winning bid.
 
-**Step 3** Prebid Rendering SDK via GAM Event Handler sets up targeting keywords into the GAM's ad unit.
+**Step 3** Prebid Rendering Module via GAM Event Handler sets up the targeting keywords into the GAM's ad unit.
 
-**Step 4** GAM SDK makes an ad request. GAM returns the winner of the waterfall.
+**Step 4** GMA SDK makes an ad request. GAM returns the winner of the waterfall.
 
 **Step 5** Basing on the ad response Prebid GAM Event Handler decided who won on the GAM - the Prebid bid or another ad source on GAM.
 
 **Step 6** The winner is displayed in the App with the respective rendering engine.
   
-
-Prebid Rendering SDK supports these ad formats:
+Prebid Rendering Module supports these ad formats:
 
 - Display Banner
 - Display Interstitial
@@ -37,7 +36,7 @@ They can be integrated using these API categories.
 - [**Native API**](android-in-app-bidding-gam-native-integration.md) - for *Native Ads*
 
 
-## Init Prebid Rendering SDK
+## Init Prebid Rendering Module
 
 To start running bid requests you have to provide an **Account Id** for your organization on Prebid server to the SDK:
 
@@ -102,7 +101,6 @@ GAM's event handlers are special containers that wrap GAM Ad Views and help to m
 
 To create the event handler you should provide a GAM Ad Unit Id and the list of available sizes for this ad unit.
 
-
 #### Step 2: Create Ad View
 
 **BannerView** - is a view that will display the particular ad. It should be added to the UI. To create it you should provide:
@@ -112,8 +110,7 @@ To create the event handler you should provide a GAM Ad Unit Id and the list of 
 
 Also, you should add the instance of `BannerView` to the UI.
 
-And assign the [listeners](../android-in-app-bidding-listeners.md) for processing ad events.
-
+And assign the listeners for processing ad events.
 
 #### Step 3: Load the Ad
 
@@ -193,7 +190,7 @@ To create an event handler you should provide a GAM Ad Unit.
 - **minSizePercentage** - specifies the minimum width and height percent an ad may occupy of a device’s real estate.
 - **eventHandler** - the instance of the interstitial event handler
 
-Also, you can assign the [listeners](../android-in-app-bidding-listeners.md) for processing ad events.
+Also, you can assign the listeners for processing ad events.
 
 > **NOTE:** minSizePercentage - plays an important role in a bidding process for display ads. If provided space is not enough demand partners won't respond with the bids.
 
@@ -206,7 +203,7 @@ Simply call the `loadAd()` method to start [In-App Bidding](../android-in-app-bi
 #### Step 4: Show the Ad when it is ready
 
 
-The most convenient way to determine if the interstitial ad is ready for displaying is to listen to the particular [listener](../android-in-app-bidding-listeners.md) method:
+The most convenient way to determine if the interstitial ad is ready for displaying is to listen to the particular listener method:
 
 ``` kotlin
 override fun onAdLoaded(interstitialAdUnit: InterstitialAdUnit) {
@@ -269,7 +266,7 @@ To create an event handler you should provide a GAM Ad Unit.
 - **configId** - an ID of Stored Impression on the Prebid server
 - **eventHandler** - the instance of rewarded event handler
 
-Also, you can assign the [listener](../android-in-app-bidding-listeners.md) for processing ad events.
+Also, you can assign the listener for processing ad events.
 
 
 #### Step 3: Load the Ad
@@ -280,10 +277,10 @@ Simply call the `loadAd()` method to start [In-App Bidding](../android-in-app-bi
 #### Step 4: Show the Ad when it is ready
 
 
-The most convenient way to determine if the ad is ready for displaying is to listen for particular [listener](../android-in-app-bidding-listeners.md) method:
+The most convenient way to determine if the ad is ready for displaying is to listen for particular listener method:
 
 ``` kotlin
 override fun onAdLoaded(rewardedAdUnit: RewardedAdUnit) {
 //Ad is ready for display
 }
-```
+```f

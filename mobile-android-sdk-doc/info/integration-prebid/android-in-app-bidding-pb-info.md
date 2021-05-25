@@ -53,7 +53,7 @@ In the Pure In-App Bidding scenario you just need to initialize the Banner Ad Vi
 - **configId** - an ID of Stored Impression on the Prebid server.
 - **size** - the size of the ad unit which will be used in the bid request.
 
-And assign the [listener](../android-in-app-bidding-listeners.md) for processing ad events.
+And assign the listener for processing ad events.
 
 #### Step 2: Load the Ad
 
@@ -116,7 +116,7 @@ In the Pure In-App Bidding scenario you just need to initialize the Banner Ad Vi
 - **configId** - an ID of Stored Impression on the Prebid server
 - **minSizePercentage** - specifies the minimum width and height percent an ad may occupy of a device’s real estate.
 
-Also you can assign the [listener](../android-in-app-bidding-listeners.md) for processing ad events.
+Also you can assign the listener for processing ad events.
 
 > **NOTE:** minSizePercentage - plays an important role in a bidding process for display ads. If provided space is not enough demand partners won't respond with the bids.
 
@@ -127,8 +127,7 @@ Simply call the `loadAd()` method to start [In-App Bidding](../android-in-app-bi
 
 #### Step 3: Show the Ad when it is ready
 
-
-The most convenient way to determine if the ad is ready for displaying is to subscribe to the particular [litener](../android-in-app-bidding-listeners.md) method:
+The most convenient way to determine if the ad is ready for displaying is to subscribe to the particular litener method:
 
 ``` kotlin
 override fun onAdLoaded(interstitialAdUnit: InterstitialAdUnit) {
@@ -176,7 +175,7 @@ Simply call the `loadAd()` method to start [In-App Bidding](../android-in-app-bi
 #### Step 3: Show the Ad when it is ready
 
 
-The most convenient way to determine if the ad is ready for displaying is to subscribe to the particular [listener](../android-in-app-bidding-listeners.md) method:
+The most convenient way to determine if the ad is ready for displaying is to subscribe to the particular listener method:
 
 ``` kotlin
 override fun onAdLoaded(rewardedAdUnit: RewardedAdUnit) {

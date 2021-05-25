@@ -1,16 +1,17 @@
-Parameters
-===================
+# Parameters
 
-The tables below list the methods and properties that the Prebid Mobile Rendering Android SDK allows to customize.
-The more actual info about the user, the app, and the device you provide the more chances to win an impression.
+The tables below list the methods and properties that the Prebid Rendering Module allows to customize.
+T
+he more actual info about the user, the app, and the device you provide the more chances to win an impression.
+
 Please strictly follow the recommendations in the below tables and provide all ❗ **Required** and **Highly Recommended** values.
 
 
 1. [Targeting](#targeting)
 2. [PrebidRenderingSettings](#prebidrenderingsettings)
 
-Targeting
---------------
+## Targeting
+
 | **Parameter**              | **Method**                | Description                                                  | Required?|
 | -------------------------- | ------------------------- | ------------------------------------------------------------ | -------- |
 | age                        | `setUserAge`              | Age of the user in years. For example: `35`   | ❗ Highly Recommended  |
@@ -30,7 +31,7 @@ Targeting
 | url/storeurl               | `setAppStoreMarketUrl`    | The URL for the mobile application in Google Play. That field is required in the request. <br />**For example:**` https://play.google.com/store/apps/details?id=com.outfit7.talkingtom`. | ❗ Required  |
 | xid                        | `setUserId`               | ID of the user within the app. For example: `"24601"` | ❗ Highly Recommended  |
 
-### How to set user parameters
+## How to set user parameters
 
 You can use `Targeting` to pass ad call request parameters.
 
@@ -49,7 +50,7 @@ Targeting.setUserAnnualIncomeInUs(50000);
 // Targeting.clearParameter(String key)
 ```
 
-### Custom key-value parameters
+## Custom key-value parameters
 
 You can submit values through `Targeting` for the extended (`c.xxx`) ad-call
 parameters.
@@ -59,8 +60,8 @@ parameters.
 | custom<br />parameter   | setCustomParameter  | A custom user parameter auto-prepended with c..<br />You should provide the plain name of the parameter, such as xxx, which will be changed to c.xxx when sent. |
 | custom <br />parameters | setCustomParameters | Custom user parameters, which consist of a dictionary of name-value parameter pairs, where each param name will be automatically prepended with c.. |
 
-PrebidRenderingSettings
------------------------
+## PrebidRenderingSettings
+
 
 | **Field**               | **Description**                                              | **Default** |
 | ----------------------- | ------------------------------------------------------------ | ----------- |

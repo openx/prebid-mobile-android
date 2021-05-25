@@ -1,35 +1,16 @@
 # Google Ad Manager Setup
 
-## Overview
-
-One of the most used kind of In-App Bidding integration is to run a parallel auction and receive a winning bid first and then inject an opportunity to display this bid into the waterfall running on the Primary Ad Server.
-
-This can be achieved by adding special Line Items marked with particular targetting keywors. Each line item should serve a custom creative, which will signal Prebid Rendering SDK that  the winning bid should be rendered.
-
-If such line item wins on the Primary Ad Server the winning bid will be displayed, otherwise, some other ad from the watterfal will be rendered. This document describes how to setup Prebid Line Items on the GAM server.
-
-### Best Practises
-
-From the very beginning publishers should pay attention to the Best Practices of configuring orders on the Primary Ad Server. It will help to improve monetization from the first steps.
-
-In order to get the best revenue publishers have to create Line Items with unique price targets according to the [price granularity](http://prebid.org/prebid-mobile/adops-price-granularity.html#autoGranularityBucket) policy. That means that is necessary to create more than one hundred line items to get the best coverage.
-
-Publishers can do it by hands, develop special scripts, or using some tool for generating orders like [PubMonkey](https://chrome.google.com/webstore/detail/pubmonkey/cjbdhopmleoleednpeaknmmbepfkhaml?hl=en)
-
-
-## Manual  Order Setup
-
-### Step 1: Create New Order
+## Step 1: Create New Order
 
  <img src="../res/orders/order-gam-create.png" alt="Pipeline Screenshot" align="center">
 
-### Step 2: Create Line Item
+## Step 2: Create Line Item
 
 To integrate the In-App Bidding into the app you have to create a Line Item with a specific price and targeting keyword.
 
 Regardless of the ability to name a Line Item in any way we strongly suggest using the price or targeting keyword in the name. It will help you when you create a hundred of them.
 
-#### Select Type
+### Select Type
 
 Create a Line Item depending on the type of expected creative kind:
 
@@ -40,22 +21,21 @@ Create a Line Item depending on the type of expected creative kind:
 
 Set sizes respectively to expected creatives.
 
-#### Select Price
+### Select Price
 
 The Line Item price should be chosen according to the price granularity policy.
 
 <img src="../res/orders/order-gam-li-price.png" alt="Pipeline Screenshot" align="center">
 
-#### Set Targeting Keywords
+### Set Targeting Keywords
 
 The **Custom targeting** property should contain a special keyword with the price of winning bid. The same as a Rate of the Line Item.
 
 <img src="../res/orders/order-gam-li-targeting.png" alt="Pipeline Screenshot" align="center">
 
+## Step 3: Prepare Prebid Creative
 
-### Step 3: Prepare Prebid Creative
-
-#### Display Banner, Display Interstitial, Video Interstitial, Outstream Video.
+### Display Banner, Display Interstitial, Video Interstitial, Outstream Video.
 
 The In-App Bidding Facade for GAM is based on [App Events](https://developers.google.com/ad-manager/mobile-ads-sdk/android/banner#app_events) feature almost for all kinds of ads. That means that creative should contain a special tag that will be processed by GAM Event Handlers.
 
@@ -69,7 +49,7 @@ If GAM Event Handler receives the `PrebidAppEvent` event it will render the winn
 
 <img src="../res/orders/order-gam-creative-banner.png" alt="Pipeline Screenshot" align="center">
 
-#### Rewarded Video
+### Rewarded Video
 
 In-App Bidding facade for Rewarded video ads is based on [OnAdMetadataChangedListener](https://developers.google.com/android/reference/com/google/android/gms/ads/rewarded/OnAdMetadataChangedListener). So you need to set up a special VAST tag in the creative.
 
@@ -79,21 +59,21 @@ https://sdk.prod.gcp.openx.org/ads/inapp_bidding/gam_rewarded.xml
 
 <img src="../res/orders/order-gam-creative-rewarded.png" alt="Pipeline Screenshot" align="center">
 
-#### Native: Unified Ad
+### Native: Unified Ad
 
 Click on **ADD CREATIVE** -> **New Creative** -> **Native Format** -> **Select Template...** and chose one of the predefined system templates.
 
-Fill the template with any default values but put the **obligotary** value for the Body - **isPrebid**. This value will show Prebid Rendering SDK that it should  render the ad from the winning bid.
+Fill the template with any default values but put the **obligotary** value for the Body - **isPrebid**. This value will show Prebid SDK that it should  render the ad from the winning bid.
 
 <img src="../res/orders/order-gam-creative-unified-ad.png" alt="Create Native Ad Screenshot" align="center">
 
-#### Native: Custom Template
+### Native: Custom Template
 
 First need to create custom Native Format. For this go to **Delivery** -> **Native** -> **Create Native Ad** -> **Android & iOS app code**. At the page for the new ad format click on **ADD VARIABLE** and create a special text entry with name **isPrebid** and default value **1**.
 
 <img src="../res/orders/order-gam-creative-custom-template-format-variable.png" alt="Create Native Ad Screenshot" align="center">
 
-This variable will show Prebid Rendering SDK that it should render the ad from the winning bid. The final custom format should look like this:
+This variable will show Prebid SDK that it should render the ad from the winning bid. The final custom format should look like this:
 
 <img src="../res/orders/order-gam-creative-custom-template-format.png" alt="Create Native Ad Screenshot" align="center">
 
@@ -103,10 +83,9 @@ Fill all needed fields for the new creative and make sure that variable **isPreb
 
 <img src="../res/orders/order-gam-creative-custom-template.png" alt="Create Native Ad Screenshot" align="center">
 
+### Native Styles
 
-#### Native Styles
-
-##### Step 1: Create a native ad
+#### Step 1: Create a native ad
 
 Go to `Google Ad Manager`, select `Delivery` > `Native`. Click `Create Native Ad`.
 
@@ -117,19 +96,20 @@ Select the `HTML & CSS editor` option.
 <img src="../res/orders/order-gam-ways-to-create-native-ad.png" alt="Ways to create Native Ad Screenshot" align="center">
 
 
-##### Step 2: Define ad settings
+#### Step 2: Define ad settings
 
 For Ad size you can specify a specific size for the ad unit or specify the `fluid` size.
 
 <img src="../res/orders/order-gam-ad-settings.png" alt="Define Native Ad settings Screenshot" align="center">
 
-##### Step 3: Style your native ad
+#### Step 3: Style your native ad
 
 You can add HTML and CSS to define your native ad template.
 
 <img src="../res/orders/order-gam-style-native-ad.png" alt="Style Native Ad Screenshot" align="center">
 
 Example HTML:
+
 ``` html
 <div class="sponsored-post">
   <div class="thumbnail">
@@ -162,6 +142,7 @@ Example HTML:
 ```
 
 Example CSS:
+
 ``` css
 .sponsored-post {
     background-color: #fffdeb;
@@ -207,23 +188,3 @@ p {
     padding: 4px;
 }
 ```
-
-## Automatic Order Setup
-
-
-In order to implement proper [price granularity](http://prebid.org/prebid-mobile/adops-price-granularity.html#autoGranularityBucket) you have to create more than a hundred of Line items. You can do it manually or using free Chrome extension [PubMonkey](https://chrome.google.com/webstore/detail/pubmonkey/cjbdhopmleoleednpeaknmmbepfkhaml?hl=en).
-
-### Setup Order Properties
-
-To generate an Order just need to set generic parameters and custom creative code:
-
-<img src="../res/orders/order-gam-pubmonkey-form.png" alt="Pipeline Screenshot" align="center">
-
-
-### Inspect the Line Items
-
-After a few minutes the Order with **170 Line Items** is ready to work:
-
-<img src="../res/orders/order-gam-pubmonkey-result.png" alt="Pipeline Screenshot" align="center">
-
-

@@ -1,10 +1,9 @@
 # Native Ads Guidelines
 
-Prebid Rendering SDK, starting from the version 1.1, supports Native Styles ads.
 
 ## Getting Started
 
-Prebid Rendering SDK implements the [OpenRTB Specification](https://www.iab.com/wp-content/uploads/2018/03/OpenRTB-Native-Ads-Specification-Final-1.2.pdf) for the native ads.
+Prebid Rendering Module implements the [OpenRTB Specification](https://www.iab.com/wp-content/uploads/2018/03/OpenRTB-Native-Ads-Specification-Final-1.2.pdf) for the native ads.
 
 The general integration scenario requires these steps from publishers:
 
@@ -19,11 +18,11 @@ The general integration scenario requires these steps from publishers:
 
 ### Native Styles
 
-Prebid Rendering SDK supports the prebid's approach for rendering [native ads](https://docs.prebid.org/prebid-mobile/pbm-api/ios/pbm-nativeadunit-ios.html). It is similar to the Google's [Native Styles](android-in-app-bidding-native-guidelines-info.md) ad format. In this case publisher should preare the layout of the ad using HTML and CSS and add the universal creative to the ad code.
+Prebid Rendering Module supports the prebid's approach for rendering [native ads](https://docs.prebid.org/prebid-mobile/pbm-api/ios/pbm-nativeadunit-ios.html). It is similar to the Google's [Native Styles](android-in-app-bidding-native-guidelines-info.md) ad format. In this case publisher should preare the layout of the ad using HTML and CSS and add the universal creative to the ad code.
 
 <img src="res/Native-Styles-Primary-Ad-Server.png" alt="Pipeline Screenshot" align="center">
 
-1. Prebid Rendering SDK sends the bid request.
+1. Prebid Rendering Module sends the bid request.
 2. Prebid server runs the header bidding auction among preconfigured demand partners.
 3. In-App Bidding SDK sets up the targeting keywords of the winning bid to the ad unit of Primary Ad Server SDK.
 4. Primary Ad Server SDK sends the ad request to the Ad Server. If Prebid's line item wins the ad response will contain **Prebid Universal Creative** and **Ad Layout**.
@@ -39,9 +38,9 @@ In the case of integration of Native Styles ads without Primary Ad Server publis
 
 
 1. Setup layout for the Native Styles ad.
-2. Prebid Rendering SDK sends the bid request.
+2. Prebid Rendering Module sends the bid request.
 3. Prebid server runs the header bidding auction among preconfigured demand partners.
-3. The received creative will be rendered in the Web View of Prebid Rendering SDK.
+3. The received creative will be rendered in the Web View of Prebid Rendering Module.
 
 ### Unified Native Ads
 
@@ -49,7 +48,7 @@ The rendering using native components is not supported yet. This ad format is sc
 
 ## Components
 
-Prebid Rendering SDK supports all Native Ad components proclaimed by the OpenRTB specification: **title**, **image**, **video**, **data**.
+Prebid Rendering Module supports all Native Ad components proclaimed by the OpenRTB specification: **title**, **image**, **video**, **data**.
 
 We strogly recomend to follow the industry best practices and requirements, especialy in the case of integration with Primary Ad Server:
 
@@ -62,7 +61,7 @@ While preparing the layout for Native Ads, account for the **AdChoices** button 
 
 ## Integration 
 
-Prebid Rendering SDK allows to integrate native ads into all supported scenarios:
+Prebid Rendering Module allows to integrate native ads into all supported scenarios:
 
 * [Google Ad Manager](integration-gam/android-in-app-bidding-gam-native-integration.md)
 * [MoPub](integration-mopub/android-in-app-bidding-mopub-native-integration.md)

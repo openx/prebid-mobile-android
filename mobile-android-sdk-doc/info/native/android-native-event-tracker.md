@@ -1,18 +1,17 @@
-NativeEventTracker class
-========================
+# NativeEventTracker
 
-`NativeEventTracker` class is used to setup 'eventtrackers' field for Native OpenRTB request. Event trackers object specifies the types of events the bidder can request to be tracked in  
-the	bid	response, and which	types of tracking are available	for	each event type, and is	included as	an array in	the	request.
 
-Constructor parameters
-----------------------
+`NativeEventTracker` class is used to setup `eventtrackers` field for Native OpenRTB request. Event trackers object specifies the types of events the bidder can request to be tracked in the	bid	response, and which types of tracking are available	for	each event type, and is included as an array in the request.
+
+## Constructor parameters
+
 | Name                 | Type                                                   | Description                                                  |
 |:---------------------|:-------------------------------------------------------|:-------------------------------------------------------------|
 | eventType            | [EventType](#eventtype)                                | Type of event available for tracking                         |
 | eventTrackingMethods | ArrayList<[EventTrackingMethod](#eventtrackingmethod)> | Array of the types of tracking available for the given event |
 
-Methods
--------
+## Methods
+
 
 | Method                                                                            | Description                                                                                  |
 |:----------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|
@@ -21,8 +20,8 @@ Methods
 | setExt(ext: Ext)                                                                  | Set the event tracker's extension object                                                     |
 | getExt(): Ext                                                                     | Returns the event tracker's extension object                                                 |
 
-Enums
------
+## Enums
+
 ### EventType
 | Name             | ID   | Description                                                                    |
 |:-----------------|:-----|:-------------------------------------------------------------------------------|

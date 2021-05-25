@@ -36,12 +36,12 @@ private fun initBanner() {
 }
 ```
 
-#### Step 1: Create Ad View
+### Step 1: Create Ad View
 
 You have to create and place MoPub's Ad View into the app page.
 
 
-#### Step 2: Create Ad Unit
+### Step 2: Create Ad Unit
 
 Create the **MoPubBannerAdUnit** object with parameters:
 
@@ -49,9 +49,10 @@ Create the **MoPubBannerAdUnit** object with parameters:
 - **size** - the size of the ad unit which will be used in the bid request.
 
 
-#### Step 3: Create and provide NativeAdConfiguration
+### Step 3: Create and provide NativeAdConfiguration
 
 NativeAdConfiguration creation example:
+
 ``` kotlin
 private fun createNativeAdConfiguration(): NativeAdConfiguration {
     val nativeAdConfiguration = NativeAdConfiguration()
@@ -104,7 +105,7 @@ private fun createNativeAdConfiguration(): NativeAdConfiguration {
 ```
 See more NativeAdConfiguration options [here](../native/android-native-ad-configuration.md).
 
-#### Step 4: Fetch Demand
+### Step 4: Fetch Demand
 
 To run an auction on Prebid run the `fetchDemand()` method which performs several actions:
 
@@ -113,7 +114,7 @@ To run an auction on Prebid run the `fetchDemand()` method which performs severa
 - Passes the winning bid to the MoPub's ad unit
 - Returns the result of bid request for future processing
 
-#### Step 5: Load the Ad
+### Step 5: Load the Ad
 
 When the bid request has completed, the responsibility of making the Ad Request is passed to the publisher. That is why you have to invoke `loadAd()` on the MoPub's Ad View explicitly in the completion handler of `fetchDemand()`.
 

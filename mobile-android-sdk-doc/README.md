@@ -1,16 +1,14 @@
-# Prebid Rendering Android SDK
-
-Prebid Rendering SDK is a part of Prebid platform which implements an In-App Bidding approach and gives opportunities to buyers to compete on your inventory at parallel bidding auctions.
+# Prebid Rendering Module Android
 
 The current SDK version is **x.x.x**.
-Go to [release notes](info/android-in-app-bidding-release-notes.md) for all SDK versions.
+Go to [release notes]().
 
 ## Quick Start
 
 
 #### Gradle Integration
 
-To add the Prebid Rendering SDK dependency, open your project and update the app module’s build.gradle to have the following repositories and dependencies:
+To add the Prebid Rendering dependency, open your project and update the app module’s build.gradle to have the following repositories and dependencies:
 
 ```
 allprojects {
@@ -30,7 +28,7 @@ dependencies {
 }
 ```
 
-## Prebid Rendering SDK Overview
+## Prebid Rendering Module Overview
 
 For requirements and integration overview, see [Getting started with In-App Bidding](info/android-in-app-bidding-getting-started.md).
 
@@ -44,7 +42,7 @@ Here are key capabilities of the Android In-App Bidding SDK:
 -   **Support of these premium ad formats:**
     -   Banner
     -   Interstitial
-    -   [**NEW**] [Native](info/android-in-app-bidding-native-guidelines-info.md) 
+    -   [Native](info/android-in-app-bidding-native-guidelines-info.md) 
     -   Rich media and MRAID 3.0 support
     -   Video Interstitial
     -   Rewarded Video
@@ -58,7 +56,3 @@ Here are key capabilities of the Android In-App Bidding SDK:
 -   **Tracking of render impression**. Prebid In-App Bidding SDK tracks [render impressions](info/android-sdk-impression-tracking.md) according to the IAB Measurement Guidelines for all managed ads. Ads rendered by Primary Ad Server SDK track an impression beacon according to the internal algorithms.
 -   **Fast and seamless integration.**
 
-
-## Contact Us
-
-If you have any questions or need help, go to [Prebid Support](https://docs.prebid.org/support/index.html).

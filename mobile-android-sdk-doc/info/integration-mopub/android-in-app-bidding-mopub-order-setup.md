@@ -1,20 +1,4 @@
 # MoPub Setup
-
-## Overview
-
-The sense of prebid technology is to run the header bidding auction first and inject an opportunity to display a winning bid into a preconfigured waterfall on the Primary Ad Server. This could be achieved by adding special Line Items which point to the prebid creative. If such line item wins on the primary ad server the prebid ad will be rendered on the client, otherwise, the ad from the predefined waterfall will be rendered.
-
-This scenario is totally supported by Prebid Rendering SDK.
-
-So the essential part of Prebid integration is creating a special Line Items on the MoPub.
-
-## Best Practises 
-
-From the very beginning publishers should pay attention to the Best Practices of configuring orders on the Primary Ad Server. It will help to improve monetization from the first steps. 
-
-In order to get the best revenue publishers have to create Line Items with unique price targets according to the [price granularity](http://prebid.org/prebid-mobile/adops-price-granularity.html#autoGranularityBucket) policy. That means that it is necessary to create more than one hundred line items to get the best coverage.
-
-Publishers can do it by hands, develop special scripts, or using some tool for generating orders like [PubMonkey](https://chrome.google.com/webstore/detail/pubmonkey/cjbdhopmleoleednpeaknmmbepfkhaml?hl=en)
  
 ## Order Setup
 
@@ -52,7 +36,7 @@ After that you should create a custom Native creative with **obligatory** proper
 
 <img src="../res/orders/order-mopub-creative-native.png" alt="Pipeline Screenshot" align="center">
 
-This property will show Prebid Rendering SDK that it should render the ad from the winning bid.
+This property will show to the Rendering Module that it should render the ad from the winning bid.
 
 #### Line Item: Native Style
 

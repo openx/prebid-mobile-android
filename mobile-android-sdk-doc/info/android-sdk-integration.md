@@ -1,8 +1,7 @@
-Integrating the SDK with your project
-=====================================
+# Integrating the SDK with your project
 
-Gradle Integration
-------------------------------
+## Gradle Integration
+
 
 To add the dependency, open your project and update the app module’s build.gradle to have the following repositories and dependencies:
 
@@ -24,8 +23,8 @@ dependencies {
 }
 ```
 
-Updating your Android manifest
-------------------------------
+## Updating your Android manifest
+
 
 Before you start, you need to integrate the SDK by updating your Android manifest.
 

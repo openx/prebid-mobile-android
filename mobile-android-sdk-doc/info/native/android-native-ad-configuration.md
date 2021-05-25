@@ -1,10 +1,9 @@
-NativeAdConfiguration class
-=============================
+# NativeAdConfiguration class
+
 
 `NativeAdConfiguration` class provides an ability to set assets, event trackers and other OpenRTB parameters required for Native Ads.
 
-Parameters
-----------
+## Parameters
 
 | Parameter      | Method                                                                     | Default | Required    | Description                                                                                                                                                                                                                                                                                                                |
 |:---------------|:---------------------------------------------------------------------------|:--------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -19,9 +18,10 @@ Parameters
 
 > **Note:** `plcmtcnt`, `aurlsupport` and `durlsupport` OpenRTB fields are not supported
 
-Enums
------
+## Enums
+
 ### ContextType
+
 | Name            | ID   | Description                                                                                  |
 |:----------------|:-----|:---------------------------------------------------------------------------------------------|
 | CONTENT_CENTRIC | 1    | Content-centric context such as news feed, article, image gallery, video gallery, or similar |
@@ -30,6 +30,7 @@ Enums
 | CUSTOM          | 500+ | To be defined by the exchange                                                                                             |
 
 ### ContextSubType
+
 | Name                 | ID   | Description                                                                                  |
 |:---------------------|:-----|:---------------------------------------------------------------------------------------------|
 | GENERAL              | 10   | General or mixed content                                                                     |
@@ -47,6 +48,7 @@ Enums
 | CUSTOM               | 500+ | To be defined by the exchange                                                                                             |
 
 ### PlacementType
+
 | Name                  | ID   | Description                                                                                                                    |
 |:----------------------|:-----|:-------------------------------------------------------------------------------------------------------------------------------|
 | CONTENT_FEED          | 1    | In the feed of content - for example as an item inside the organic feed/grid/listing/carousel                                  |

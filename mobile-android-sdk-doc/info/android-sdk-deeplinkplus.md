@@ -1,6 +1,6 @@
 # Deep Link+
 
-Prebid Rendering SDK supports the premium standard for retargeting campaigns - [DeepLink+](https://developers.mopub.com/dsps/ad-formats/deep-linking/)
+Prebid Rendering Module supports the premium standard for retargeting campaigns - [DeepLink+](https://developers.mopub.com/dsps/ad-formats/deep-linking/)
 
 ## Advantages over traditional mobile deep-linking functionality
 
