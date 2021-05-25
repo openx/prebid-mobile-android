@@ -283,4 +283,4 @@ The most convenient way to determine if the ad is ready for displaying is to lis
 override fun onAdLoaded(rewardedAdUnit: RewardedAdUnit) {
 //Ad is ready for display
 }
-```f
+```

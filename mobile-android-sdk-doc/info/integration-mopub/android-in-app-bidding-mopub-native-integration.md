@@ -36,6 +36,57 @@ private fun initBanner() {
 }
 ```
 
+## Native Ads
+The integration of native ads into MoPub monetization is based on MoPub's Mediation feature (using `PrebidNativeAdapter`).
+Here are the basic steps of integration:
+
+``` kotlin
+fun initAd() {
+    // Initialize AdapterHelper and MoPubNative.
+    adapterHelper = AdapterHelper()
+    mopubNative = MoPubNative(requireContext(), adUnitId, nativeNetworkListener)
+    
+    // Create viewBinder.
+    val viewBinder = ViewBinder.Builder(R.layout.lyt_native_ad)
+            // ...
+            .build()
+            
+    // Register ad renderers.
+    mopubNative.registerAdRenderer(PrebidNativeAdRenderer(viewBinder))
+    mopubNative.registerAdRenderer(MoPubStaticNativeAdRenderer(viewBinder))
+    
+    // Initialize MoPubNativeAdUnit and provide necessary configuration.
+    mopubNativeAdUnit = MoPubNativeAdUnit(requireContext(), configId, getNativeAdConfig())
+    
+    // Execute ad load.
+    loadAd()
+}
+
+fun loadAd() {
+    // Initialize MoPub SDK and make ad request. 
+    MoPub.initializeSdk(requireContext(), SdkConfiguration.Builder(adUnitId).build()) {
+        mopubNativeAdUnit.fetchDemand(keywordsContainer, mopubNative) {
+            val requestParameters = RequestParameters.Builder()
+                    .keywords(convertMapToMoPubKeywords(keywordsContainer))
+                    .build()
+            mopubNative.makeRequest(requestParameters)
+        }
+    }
+}
+```
+
+``` kotlin
+// Add view when receiving a successful NativeAd response from MoPub.
+object : MoPubNative.MoPubNativeNetworkListener {
+    override fun onNativeLoad(nativeAd: NativeAd?) {
+        val view = adapterHelper.getAdView(null, viewContainer, nativeAd)
+        viewContainer.removeAllViews()
+        // Add view to viewContainer
+        viewContainer.addView(view)
+    }
+}
+```
+
 ### Step 1: Create Ad View
 
 You have to create and place MoPub's Ad View into the app page.

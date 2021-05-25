@@ -42,15 +42,35 @@ In the case of integration of Native Styles ads without Primary Ad Server publis
 3. Prebid server runs the header bidding auction among preconfigured demand partners.
 3. The received creative will be rendered in the Web View of Prebid Rendering Module.
 
-### Unified Native Ads
+### Native Ads
 
-The rendering using native components is not supported yet. This ad format is scheduled for the next version.
+The general integration scenario requires these steps from publishers:
+
+1. Prepare the ad layout.
+2. Create Native Ad Unit.
+3. Configure the Native Ad unit using [NativeAdConfiguration](native/android-native-ad-configuration.md).
+    * Provide the list of **[Native Assets](#components)** representing the ad's structure.
+    * Tune other general properties of the ad.
+4. Make a bid request.
+6. Find native ad using `NativeUtils.findNativeAd`.
+7. Bind the data from the native ad response with the layout.
+
+``` kotlin
+nativeAdUnit?.fetchDemand {
+    if (it.fetchDemandResult != FetchDemandResult.SUCCESS) {
+        return@fetchDemand
+    }
+    NativeUtils.findNativeAd(it) { nativeAd ->
+        inflateViewContentWithPrebid(nativeAd)
+    }
+}
+```
 
 ## Components
 
 Prebid Rendering Module supports all Native Ad components proclaimed by the OpenRTB specification: **title**, **image**, **video**, **data**.
 
-We strogly recomend to follow the industry best practices and requirements, especialy in the case of integration with Primary Ad Server:
+We strongly recommend to follow the industry best practices and requirements, especialy in the case of integration with Primary Ad Server:
 
 * [OpenRTB Specification](https://www.iab.com/wp-content/uploads/2018/03/OpenRTB-Native-Ads-Specification-Final-1.2.pdf)
 * [The Native Advertizing Playbook](https://www.iab.com/wp-content/uploads/2015/06/IAB-Native-Advertising-Playbook2.pdf)
