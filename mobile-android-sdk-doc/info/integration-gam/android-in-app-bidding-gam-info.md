@@ -1,8 +1,12 @@
 # Google Ad Manager Integration
 
-The integration of Prebid Rendering Module with Google Ad Manager (GAM) assumes that publisher has an account on GAM and has already integrated the Google Mobile Ads SDK (GMA SDK) into the app project. Prebid Rendering Module was tested with **GAM SDK 7.61.0**. 
+The integration of Prebid Rendering Module with Google Ad Manager (GAM) assumes that publisher has an account on GAM and has already integrated the Google Mobile Ads SDK (GMA SDK) into the app project. 
+
 
 If you do not have GAM SDK in the app yet, refer the the [Google Integration Documentation](https://developers.google.com/ad-manager/mobile-ads-sdk/android/quick-start).
+
+Prebid Rendering Module was tested with **GAM SDK 7.61.0**. 
+
 
 ## GAM Integration Overview
 
@@ -74,7 +78,7 @@ implementation('org.prebid:prebid-mobile-sdk-gamEventHandlers:x.x.x')
 
 ## Banner API
 
-To integrate a banner ad you need to implement three easy steps:
+To integrate the banner ad you need to implement three easy steps:
 
 
 ``` kotlin

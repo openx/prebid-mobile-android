@@ -9,12 +9,11 @@
 
 ## Mobile API
 
-The integration of Pure In-App Bidding is similar to the [integration](../android-sdk-integration.md) of any other regular Ad SDK. The only difference is that the header bidding auction will be run at the backend instead of the Ad Server auction.
+The [integration](../android-sdk-integration.md) of Pure In-App Bidding is similar to the integration of any other regular Ad SDK. 
 
 <img src="../res/Pure-In-App-Bidding-Integration.png" alt="Pipeline Screenshot" align="center">
 
-
-Prebid Rendering In-App Bidding SDK provides ability to integrate header bidding for these ad kinds:
+Prebid Rendering Module provides ability to integrate  these ad formats:
 
 - Display Banner
 - Display Interstitial
@@ -23,9 +22,9 @@ Prebid Rendering In-App Bidding SDK provides ability to integrate header bidding
 - Outstream Video
 - [Native Styles](android-in-app-bidding-prebid-native-integration.md)
 
-However, Prebid Rendering In-App Bidding facade provides only three kinds of API classes for these ads:
+However, the  Rendering Module provides only three kinds of API classes for these ads:
 
-- **Banner API** - for **Display Banner** 
+- **Banner API** - for **Display** and **Video**  Banners
 - **Interstitial API** - for **Display** and **Video** Interstitials
 - **Rewarded API** - for **Rewarded Video**
 
@@ -111,7 +110,7 @@ interstitialAdUnit?.show()
 #### Step 1: Create an Ad Unit
 
 
-In the Pure In-App Bidding scenario you just need to initialize the Banner Ad View with correct properties:
+In the Pure In-App Bidding scenario you just need to initialize the Interstitial Ad Unit with correct properties:
 
 - **configId** - an ID of Stored Impression on the Prebid server
 - **minSizePercentage** - specifies the minimum width and height percent an ad may occupy of a device’s real estate.
@@ -131,7 +130,7 @@ The most convenient way to determine if the ad is ready for displaying is to sub
 
 ``` kotlin
 override fun onAdLoaded(interstitialAdUnit: InterstitialAdUnit) {
-//Ad is ready for display
+    //Ad is ready for display
 }
 ```
 
@@ -154,12 +153,11 @@ rewardedAdUnit?.loadAd()
 rewardedAdUnit?.show()
 ```
 
-To be notified when a user earns a reward - implement the `RewardedAdUnitListener` interface. Now this method will be called when the ad is completed.
+To be notified when a user earns a reward - implement the `RewardedAdUnitListener` interface. For now this method will be called when the ad is completed.
 
 ``` kotlin
 fun onUserEarnedReward(rewardedAdUnit: RewardedAdUnit)
 ```
-
 
 #### Step 1: Create Rewarded Ad Unit
 

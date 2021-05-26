@@ -1,10 +1,9 @@
 # Prebid Rendering Module Android
 
 The current SDK version is **x.x.x**.
-Go to [release notes]().
+Go to [release notes]() for the details.
 
 ## Quick Start
-
 
 #### Gradle Integration
 
@@ -32,14 +31,15 @@ dependencies {
 
 For requirements and integration overview, see [Getting started with In-App Bidding](info/android-in-app-bidding-getting-started.md).
 
-Here are key capabilities of the Android In-App Bidding SDK:
+Here are key capabilities of the Rendering Module:
 
--   **Integration Scenarios**
+- **Integration Scenarios**
+    - [Pure In-App Bidding](info/integration-prebid/android-in-app-bidding-pb-info.md)
     - [Google Ad Manager](info/integration-gam/android-in-app-bidding-gam-info.md)
     - [MoPub](info/integration-mopub/android-in-app-bidding-mopub-info.md)
-    - [Pure In-App Bidding](info/integration-prebid/android-in-app-bidding-pb-info.md)
+   
 
--   **Support of these premium ad formats:**
+- **Support of these ad formats:**
     -   Banner
     -   Interstitial
     -   [Native](info/android-in-app-bidding-native-guidelines-info.md) 
@@ -47,12 +47,12 @@ Here are key capabilities of the Android In-App Bidding SDK:
     -   Video Interstitial
     -   Rewarded Video
     -   Outstream Video
--  **Open Measurement Support.**
--   **Direct SDK integration**. Allows you to pass first-party app data,
+- **Open Measurement Support.**
+- **Direct SDK integration**. Allows you to pass first-party app data,
     user data, device data, and location data.  
--   **Privacy Regulation Compliance**. The In-App Bidding SDK meets **GDPR**, **CCPA**, **COPPA** requirements according to the IAB specifications.
--   **App targeting campaigns**. With the [support of deeplink+](info/android-sdk-deeplinkplus.md) SDK is able to manage the ads with premium UX for retargeting campaigns.
--    **Targeting**. Use [custom ad parameters](info/android-sdk-parameters.md) to increase the chance to win an impression and to improve ad views' UX.
--   **Tracking of render impression**. Prebid In-App Bidding SDK tracks [render impressions](info/android-sdk-impression-tracking.md) according to the IAB Measurement Guidelines for all managed ads. Ads rendered by Primary Ad Server SDK track an impression beacon according to the internal algorithms.
--   **Fast and seamless integration.**
+- **Privacy Regulation Compliance**. The In-App Bidding SDK meets **GDPR**, **CCPA**, **COPPA** requirements according to the IAB specifications.
+- **App targeting campaigns**. With the [support of deeplink+](info/android-sdk-deeplinkplus.md) SDK is able to manage the ads with premium UX for retargeting campaigns.
+- **Targeting**. Use [custom ad parameters](info/android-sdk-parameters.md) to increase the chance to win an impression and to improve ad views' UX.
+- **Tracking of render impression**. Prebid In-App Bidding SDK tracks [render impressions](info/android-sdk-impression-tracking.md) according to the IAB Measurement Guidelines for all managed ads. Ads rendered by Primary Ad Server SDK track an impression beacon according to the internal algorithms.
+- **Fast and seamless integration.**
 
