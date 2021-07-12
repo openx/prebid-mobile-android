@@ -438,14 +438,6 @@ class PrebidServerAdapter implements DemandAdapter {
                         for (AdSize size : requestParams.getAdSizes()) {
                             format.put(new JSONObject().put("w", size.getWidth()).put("h", size.getHeight()));
                         }
-                    } else if (adType.equals(AdType.INTERSTITIAL)) {
-                        Context context = PrebidMobile.getApplicationContext();
-                        if (context != null) {
-                            format.put(new JSONObject().put("w", context.getResources().getConfiguration().screenWidthDp).put("h", context.getResources().getConfiguration().screenHeightDp));
-                        } else {
-                            // Unlikely this is being called, if so, please check if you've set up the SDK properly
-                            throw new NoContextException();
-                        }
                     }
 
                     banner.put("format", format);

@@ -20,8 +20,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
 import com.mopub.mobileads.MoPubView;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -59,6 +57,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.annotation.Nullable;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockResponse;
@@ -824,7 +823,7 @@ public class PrebidServerAdapterTest extends BaseSetup {
         assertEquals(Locale.getDefault().getLanguage(), device.getString("language"));
         assertEquals(String.valueOf(BaseSetup.testSDK), device.getString("osv"));
         assertEquals(320, device.getInt("w"));
-        assertEquals(0, device.getInt("h"));
+        assertEquals(470, device.getInt("h"));
         assertEquals(1, device.getInt("pxratio"));
         assertEquals(2, device.getInt("connectiontype"));
         JSONObject app = postData.getJSONObject("app");
@@ -1937,11 +1936,14 @@ public class PrebidServerAdapterTest extends BaseSetup {
         AdSize minSizePerc = new AdSize(50, 70);
 
         JSONObject extInterstitial = null;
-        JSONObject banner = null;
+        JSONArray formatArray = null;
         int instl = 0;
+        // for banner to be non null
+        BannerBaseAdUnit.Parameters bannerParameters = new BannerBaseAdUnit.Parameters();
+        bannerParameters.setApi(Arrays.asList(Signals.Api.MRAID_2));
 
         //when
-        JSONObject postData = getPostDataHelper(AdType.INTERSTITIAL, null, null, minSizePerc, null, null, null);
+        JSONObject postData = getPostDataHelper(AdType.INTERSTITIAL, null, null, minSizePerc, null, bannerParameters, null);
 
         try {
             extInterstitial = postData.getJSONObject("device").getJSONObject("ext").getJSONObject("prebid").getJSONObject("interstitial");
@@ -1950,9 +1952,9 @@ public class PrebidServerAdapterTest extends BaseSetup {
         }
 
         try {
-            banner = postData.getJSONArray("imp").getJSONObject(0).getJSONObject("banner").getJSONArray("format").getJSONObject(0);
+            formatArray = postData.getJSONArray("imp").getJSONObject(0).getJSONObject("banner").optJSONArray("format");
         } catch (Exception ex) {
-            fail("banner parsing fail");
+            fail("Failed to access [format] array");
         }
 
         try {
@@ -1965,9 +1967,7 @@ public class PrebidServerAdapterTest extends BaseSetup {
         Assert.assertNotNull(extInterstitial);
         assertTrue(extInterstitial.getInt("minwidthperc") == 50 && extInterstitial.getInt("minheightperc") == 70);
 
-        Assert.assertNotNull(banner);
-        assertTrue(banner.has("w"));
-        assertTrue(banner.has("h"));
+        Assert.assertNull(formatArray);
 
         assertEquals(1, instl);
     }

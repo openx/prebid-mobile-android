@@ -118,15 +118,6 @@ public class DemandRequestBuilder {
 
             if (adUnit instanceof InterstitialAdUnit) {
                 imp.put("instl", 1);
-
-                Display display = ((Activity) context).getWindowManager().getDefaultDisplay();
-                Point size = new Point();
-                display.getSize(size);
-
-                JSONObject sizeObject = new JSONObject();
-                sizeObject.put("w", size.x);
-                sizeObject.put("h", size.y);
-                sizes.put(sizeObject);
             }
 
             JSONObject formats = new JSONObject();
